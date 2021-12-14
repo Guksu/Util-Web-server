@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from './user/entitiy/user.entity';
+import { UserModule } from './user/user.module';
+import { CommonModule } from './common/common.module';
+import { AuthModule } from './auth/auth.module';
 require('dotenv').config();
 
 @Module({
@@ -12,7 +16,7 @@ require('dotenv').config();
       username: 'root',
       password: process.env.PASSWORD,
       database: 'util-web',
-      entities: [],
+      entities: [User],
       synchronize: true,
     }),
     GraphQLModule.forRoot({
@@ -26,6 +30,9 @@ require('dotenv').config();
         }
       },
     }),
+    UserModule,
+    CommonModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
