@@ -22,9 +22,6 @@ let UserService = class UserService {
     constructor(user, jwtService) {
         this.user = user;
         this.jwtService = jwtService;
-        this.me = () => {
-            return 'me';
-        };
     }
     async createUser({ id, name, password, }) {
         try {
@@ -50,6 +47,26 @@ let UserService = class UserService {
             const payload = { id };
             const accessToken = await this.jwtService.sign(payload);
             return { ok: true, token: accessToken };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
+    async profileInfo(user) {
+        try {
+            const findeUser = await this.user.find(user['user']);
+            console.log(findeUser);
+            if (!findeUser)
+                return {
+                    ok: false,
+                    error: '로그인 오류 혹은 계정이 없습니다',
+                };
+            return {
+                ok: true,
+                id: findeUser[0].id,
+                name: findeUser[0].name,
+                userImgUrl: findeUser[0].userImgUrl,
+            };
         }
         catch (error) {
             return { ok: false, error: error };

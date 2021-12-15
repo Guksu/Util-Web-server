@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserInput, CreateUserOutput } from './dto/createUser.dto';
 import { LoginInput, LoginOutput } from './dto/login.dto';
+import { ProfileInfoOutput } from './dto/profileInfo.dto';
 import { User } from './entitiy/user.entity';
 
 @Injectable()
@@ -13,10 +14,6 @@ export class UserService {
     private readonly user: Repository<User>,
     private readonly jwtService: JwtService,
   ) {}
-
-  me = () => {
-    return 'me';
-  };
 
   async createUser({
     id,
@@ -48,6 +45,27 @@ export class UserService {
       const accessToken = await this.jwtService.sign(payload);
 
       return { ok: true, token: accessToken };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async profileInfo(user: User): Promise<ProfileInfoOutput> {
+    try {
+      const findeUser = await this.user.find(user['user']);
+      console.log(findeUser);
+      if (!findeUser)
+        return {
+          ok: false,
+          error: '로그인 오류 혹은 계정이 없습니다',
+        };
+
+      return {
+        ok: true,
+        id: findeUser[0].id,
+        name: findeUser[0].name,
+        userImgUrl: findeUser[0].userImgUrl,
+      };
     } catch (error) {
       return { ok: false, error: error };
     }
