@@ -20,6 +20,7 @@ const auth_user_decorator_1 = require("../auth/auth.user-decorator");
 const changePw_dto_1 = require("./dto/changePw.dto");
 const changeUserImg_dto_1 = require("./dto/changeUserImg.dto");
 const createUser_dto_1 = require("./dto/createUser.dto");
+const deleteUser_dto_1 = require("./dto/deleteUser.dto");
 const login_dto_1 = require("./dto/login.dto");
 const profileInfo_dto_1 = require("./dto/profileInfo.dto");
 const user_entity_1 = require("./entitiy/user.entity");
@@ -42,6 +43,9 @@ let UserResolver = class UserResolver {
     }
     changeUserImg(user, changeUserImgInput) {
         return this.userService.changeUserImg(user, changeUserImgInput);
+    }
+    deleteUser(user, deleteUserInput) {
+        return this.userService.deleteUser(user, deleteUserInput);
     }
 };
 __decorate([
@@ -86,6 +90,16 @@ __decorate([
         changeUserImg_dto_1.ChangeUserImgInput]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "changeUserImg", null);
+__decorate([
+    (0, graphql_1.Mutation)((type) => deleteUser_dto_1.DeleteUserOutput),
+    (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
+    __param(0, (0, auth_user_decorator_1.GetUser)()),
+    __param(1, (0, graphql_1.Args)('input')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.User,
+        deleteUser_dto_1.DeleteUserInput]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "deleteUser", null);
 UserResolver = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [user_service_1.UserService])

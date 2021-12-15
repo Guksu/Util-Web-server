@@ -1,6 +1,7 @@
 import { ChangePwInput, ChangePwOutput } from './dto/changePw.dto';
 import { ChangeUserImgInput, ChangeUserImgOutput } from './dto/changeUserImg.dto';
 import { CreateUserInput, CreateUserOutput } from './dto/createUser.dto';
+import { DeleteUserInput, DeleteUserOutput } from './dto/deleteUser.dto';
 import { LoginInput, LoginOutput } from './dto/login.dto';
 import { ProfileInfoOutput } from './dto/profileInfo.dto';
 import { User } from './entitiy/user.entity';
@@ -13,4 +14,5 @@ export declare class UserResolver {
     profileInfo(user: User): Promise<ProfileInfoOutput>;
     changePw(user: User, changePwInput: ChangePwInput): Promise<ChangePwOutput>;
     changeUserImg(user: User, changeUserImgInput: ChangeUserImgInput): Promise<ChangeUserImgOutput>;
+    deleteUser(user: User, deleteUserInput: DeleteUserInput): Promise<DeleteUserOutput>;
 }

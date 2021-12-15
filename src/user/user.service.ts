@@ -8,6 +8,7 @@ import {
   ChangeUserImgOutput,
 } from './dto/changeUserImg.dto';
 import { CreateUserInput, CreateUserOutput } from './dto/createUser.dto';
+import { DeleteUserInput, DeleteUserOutput } from './dto/deleteUser.dto';
 import { LoginInput, LoginOutput } from './dto/login.dto';
 import { ProfileInfoOutput } from './dto/profileInfo.dto';
 import { User } from './entitiy/user.entity';
@@ -108,6 +109,29 @@ export class UserService {
         };
       findUser[0].userImgUrl = userImgUrl;
       await this.user.save(findUser[0]);
+
+      return { ok: true };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async deleteUser(
+    user: User,
+    { password }: DeleteUserInput,
+  ): Promise<DeleteUserOutput> {
+    try {
+      const findUser = await this.user.find(user['user']);
+      if (!findUser)
+        return {
+          ok: false,
+          error: '로그인 오류 혹은 계정이 없습니다',
+        };
+
+      const checkPw = await findUser[0].checkPassword(password);
+      if (!checkPw) return { ok: false, error: '비밀번호를 다시 입력하세요' };
+
+      await this.user.delete(findUser[0]);
 
       return { ok: true };
     } catch (error) {

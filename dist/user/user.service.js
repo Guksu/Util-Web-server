@@ -103,6 +103,24 @@ let UserService = class UserService {
             return { ok: false, error: error };
         }
     }
+    async deleteUser(user, { password }) {
+        try {
+            const findUser = await this.user.find(user['user']);
+            if (!findUser)
+                return {
+                    ok: false,
+                    error: '로그인 오류 혹은 계정이 없습니다',
+                };
+            const checkPw = await findUser[0].checkPassword(password);
+            if (!checkPw)
+                return { ok: false, error: '비밀번호를 다시 입력하세요' };
+            await this.user.delete(findUser[0]);
+            return { ok: true };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),

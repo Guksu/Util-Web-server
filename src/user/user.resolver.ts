@@ -8,6 +8,7 @@ import {
   ChangeUserImgOutput,
 } from './dto/changeUserImg.dto';
 import { CreateUserInput, CreateUserOutput } from './dto/createUser.dto';
+import { DeleteUserInput, DeleteUserOutput } from './dto/deleteUser.dto';
 import { LoginInput, LoginOutput } from './dto/login.dto';
 import { ProfileInfoOutput } from './dto/profileInfo.dto';
 import { User } from './entitiy/user.entity';
@@ -51,5 +52,14 @@ export class UserResolver {
     @Args('input') changeUserImgInput: ChangeUserImgInput,
   ): Promise<ChangeUserImgOutput> {
     return this.userService.changeUserImg(user, changeUserImgInput);
+  }
+
+  @Mutation((type) => DeleteUserOutput)
+  @UseGuards(GqlAuthGuard)
+  deleteUser(
+    @GetUser() user: User,
+    @Args('input') deleteUserInput: DeleteUserInput,
+  ): Promise<DeleteUserOutput> {
+    return this.userService.deleteUser(user, deleteUserInput);
   }
 }
