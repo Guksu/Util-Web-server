@@ -54,19 +54,50 @@ let UserService = class UserService {
     }
     async profileInfo(user) {
         try {
-            const findeUser = await this.user.find(user['user']);
-            console.log(findeUser);
-            if (!findeUser)
+            const findUser = await this.user.find(user['user']);
+            if (!findUser)
                 return {
                     ok: false,
                     error: '로그인 오류 혹은 계정이 없습니다',
                 };
             return {
                 ok: true,
-                id: findeUser[0].id,
-                name: findeUser[0].name,
-                userImgUrl: findeUser[0].userImgUrl,
+                id: findUser[0].id,
+                name: findUser[0].name,
+                userImgUrl: findUser[0].userImgUrl,
             };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
+    async changePw(user, { password }) {
+        try {
+            const findUser = await this.user.find(user['user']);
+            if (!findUser)
+                return {
+                    ok: false,
+                    error: '로그인 오류 혹은 계정이 없습니다',
+                };
+            findUser[0].password = password;
+            await this.user.save(findUser[0]);
+            return { ok: true };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
+    async changeUserImg(user, { userImgUrl }) {
+        try {
+            const findUser = await this.user.find(user['user']);
+            if (!findUser)
+                return {
+                    ok: false,
+                    error: '로그인 오류 혹은 계정이 없습니다',
+                };
+            findUser[0].userImgUrl = userImgUrl;
+            await this.user.save(findUser[0]);
+            return { ok: true };
         }
         catch (error) {
             return { ok: false, error: error };

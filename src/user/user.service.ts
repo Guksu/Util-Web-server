@@ -2,6 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ChangePwInput, ChangePwOutput } from './dto/changePw.dto';
+import {
+  ChangeUserImgInput,
+  ChangeUserImgOutput,
+} from './dto/changeUserImg.dto';
 import { CreateUserInput, CreateUserOutput } from './dto/createUser.dto';
 import { LoginInput, LoginOutput } from './dto/login.dto';
 import { ProfileInfoOutput } from './dto/profileInfo.dto';
@@ -52,9 +57,8 @@ export class UserService {
 
   async profileInfo(user: User): Promise<ProfileInfoOutput> {
     try {
-      const findeUser = await this.user.find(user['user']);
-      console.log(findeUser);
-      if (!findeUser)
+      const findUser = await this.user.find(user['user']);
+      if (!findUser)
         return {
           ok: false,
           error: '로그인 오류 혹은 계정이 없습니다',
@@ -62,10 +66,50 @@ export class UserService {
 
       return {
         ok: true,
-        id: findeUser[0].id,
-        name: findeUser[0].name,
-        userImgUrl: findeUser[0].userImgUrl,
+        id: findUser[0].id,
+        name: findUser[0].name,
+        userImgUrl: findUser[0].userImgUrl,
       };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async changePw(
+    user: User,
+    { password }: ChangePwInput,
+  ): Promise<ChangePwOutput> {
+    try {
+      const findUser = await this.user.find(user['user']);
+      if (!findUser)
+        return {
+          ok: false,
+          error: '로그인 오류 혹은 계정이 없습니다',
+        };
+      findUser[0].password = password;
+      await this.user.save(findUser[0]);
+
+      return { ok: true };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async changeUserImg(
+    user: User,
+    { userImgUrl }: ChangeUserImgInput,
+  ): Promise<ChangeUserImgOutput> {
+    try {
+      const findUser = await this.user.find(user['user']);
+      if (!findUser)
+        return {
+          ok: false,
+          error: '로그인 오류 혹은 계정이 없습니다',
+        };
+      findUser[0].userImgUrl = userImgUrl;
+      await this.user.save(findUser[0]);
+
+      return { ok: true };
     } catch (error) {
       return { ok: false, error: error };
     }

@@ -1,5 +1,7 @@
 import { JwtService } from '@nestjs/jwt';
 import { Repository } from 'typeorm';
+import { ChangePwInput, ChangePwOutput } from './dto/changePw.dto';
+import { ChangeUserImgInput, ChangeUserImgOutput } from './dto/changeUserImg.dto';
 import { CreateUserInput, CreateUserOutput } from './dto/createUser.dto';
 import { LoginInput, LoginOutput } from './dto/login.dto';
 import { ProfileInfoOutput } from './dto/profileInfo.dto';
@@ -11,4 +13,6 @@ export declare class UserService {
     createUser({ id, name, password, }: CreateUserInput): Promise<CreateUserOutput>;
     login({ id, password }: LoginInput): Promise<LoginOutput>;
     profileInfo(user: User): Promise<ProfileInfoOutput>;
+    changePw(user: User, { password }: ChangePwInput): Promise<ChangePwOutput>;
+    changeUserImg(user: User, { userImgUrl }: ChangeUserImgInput): Promise<ChangeUserImgOutput>;
 }
