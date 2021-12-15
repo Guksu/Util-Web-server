@@ -14,12 +14,14 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
+const jwt_1 = require("@nestjs/jwt");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./entitiy/user.entity");
 let UserService = class UserService {
-    constructor(user) {
+    constructor(user, jwtService) {
         this.user = user;
+        this.jwtService = jwtService;
         this.me = () => {
             return 'me';
         };
@@ -37,11 +39,28 @@ let UserService = class UserService {
             return { ok: false, error: error };
         }
     }
+    async login({ id, password }) {
+        try {
+            const findeUser = await this.user.findOne({ id });
+            if (!findeUser)
+                return { ok: false, error: '아이디를 다시 입력하세요' };
+            const checkPw = await findeUser.checkPassword(password);
+            if (!checkPw)
+                return { ok: false, error: '비밀번호를 다시 입력하세요' };
+            const payload = { id };
+            const accessToken = await this.jwtService.sign(payload);
+            return { ok: true, token: accessToken };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        jwt_1.JwtService])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map
