@@ -6,9 +6,11 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Account } from 'src/account/entitiy/account.entity';
 
 @InputType('UserInputType', { isAbstract: true })
 @ObjectType()
@@ -37,6 +39,12 @@ export class User {
   @Field((type) => String, { nullable: true })
   @IsString()
   userImgUrl?: string;
+
+  @OneToMany((type) => Account, (Account) => Account.user, {
+    onDelete: 'CASCADE',
+  })
+  @Field((type) => [Account], { nullable: true })
+  account: [Account];
 
   @BeforeInsert()
   @BeforeUpdate()

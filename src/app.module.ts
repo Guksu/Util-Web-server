@@ -5,6 +5,8 @@ import { User } from './user/entitiy/user.entity';
 import { UserModule } from './user/user.module';
 import { CommonModule } from './common/common.module';
 import { AuthModule } from './auth/auth.module';
+import { AccountModule } from './account/account.module';
+import { Account } from './account/entitiy/account.entity';
 require('dotenv').config();
 
 @Module({
@@ -16,7 +18,7 @@ require('dotenv').config();
       username: 'root',
       password: process.env.PASSWORD,
       database: 'util-web',
-      entities: [User],
+      entities: [User, Account],
       synchronize: true,
     }),
     GraphQLModule.forRoot({
@@ -33,6 +35,7 @@ require('dotenv').config();
     UserModule,
     CommonModule,
     AuthModule,
+    AccountModule,
   ],
   controllers: [],
   providers: [],
