@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Field, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Field, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GqlAuthGuard } from 'src/auth/auth.guard';
 import { GetUser } from 'src/auth/auth.user-decorator';
 import { User } from 'src/user/entitiy/user.entity';
@@ -11,6 +11,7 @@ import {
   DeleteFassionInput,
   DeleteFassionOutput,
 } from './dto/deleteFassion.dto';
+import { GetMyFassionListOutput } from './dto/getMyFassionList.dto';
 import { FassionService } from './fassion.service';
 
 @Resolver()
@@ -33,5 +34,11 @@ export class FassionResolver {
     @Args('input') deleteFassionInput: DeleteFassionInput,
   ): Promise<DeleteFassionOutput> {
     return this.fassionService.deleteFassion(user, deleteFassionInput);
+  }
+
+  @Query((type) => GetMyFassionListOutput)
+  @UseGuards(GqlAuthGuard)
+  getMyFassionList(@GetUser() user: User): Promise<GetMyFassionListOutput> {
+    return this.fassionService.getMyFassionList(user);
   }
 }

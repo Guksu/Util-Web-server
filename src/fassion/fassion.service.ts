@@ -10,6 +10,7 @@ import {
   DeleteFassionInput,
   DeleteFassionOutput,
 } from './dto/deleteFassion.dto';
+import { GetMyFassionListOutput } from './dto/getMyFassionList.dto';
 import { Fassion } from './entitiy/fassion.entity';
 
 @Injectable()
@@ -48,6 +49,15 @@ export class FassionService {
       await this.fassion.delete(checkFassion);
 
       return { ok: true };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async getMyFassionList(user: User): Promise<GetMyFassionListOutput> {
+    try {
+      const getFassion = await this.fassion.find({ user: user['user'] });
+      return { ok: true, fassion: getFassion };
     } catch (error) {
       return { ok: false, error: error };
     }
