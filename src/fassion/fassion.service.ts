@@ -39,10 +39,9 @@ export class FassionService {
     }
   }
 
-  async deleteFassion(
-    user: User,
-    { fassionNo }: DeleteFassionInput,
-  ): Promise<DeleteFassionOutput> {
+  async deleteFassion({
+    fassionNo,
+  }: DeleteFassionInput): Promise<DeleteFassionOutput> {
     try {
       const checkFassion = await this.fassion.findOne({ fassionNo });
 

@@ -29,7 +29,7 @@ let UserResolver = class UserResolver {
     constructor(userService) {
         this.userService = userService;
     }
-    creataeUser(createUserInput) {
+    createUser(createUserInput) {
         return this.userService.createUser(createUserInput);
     }
     login(loginInput) {
@@ -54,7 +54,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [createUser_dto_1.CreateUserInput]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "creataeUser", null);
+], UserResolver.prototype, "createUser", null);
 __decorate([
     (0, graphql_1.Mutation)((type) => login_dto_1.LoginOutput),
     __param(0, (0, graphql_1.Args)('input')),

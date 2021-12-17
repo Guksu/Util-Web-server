@@ -9,6 +9,8 @@ import { AccountModule } from './account/account.module';
 import { Account } from './account/entitiy/account.entity';
 import { FassionModule } from './fassion/fassion.module';
 import { Fassion } from './fassion/entitiy/fassion.entity';
+import { FoodBoardModule } from './food-board/food-board.module';
+import { FoodBoard } from './food-board/entitiy/food-board.entity';
 require('dotenv').config();
 
 @Module({
@@ -20,7 +22,7 @@ require('dotenv').config();
       username: 'root',
       password: process.env.PASSWORD,
       database: 'util-web',
-      entities: [User, Account, Fassion],
+      entities: [User, Account, Fassion, FoodBoard],
       synchronize: true,
     }),
     GraphQLModule.forRoot({
@@ -39,6 +41,7 @@ require('dotenv').config();
     AuthModule,
     AccountModule,
     FassionModule,
+    FoodBoardModule,
   ],
   controllers: [],
   providers: [],

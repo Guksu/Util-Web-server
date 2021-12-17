@@ -8,7 +8,7 @@ export declare class FassionService {
     private readonly fassion;
     constructor(fassion: Repository<Fassion>);
     createFassion(user: User, { date, imgUrl, secret }: CreateFassionInput): Promise<CreateFassionOutput>;
-    deleteFassion(user: User, { fassionNo }: DeleteFassionInput): Promise<DeleteFassionOutput>;
+    deleteFassion({ fassionNo, }: DeleteFassionInput): Promise<DeleteFassionOutput>;
     getMyFassionList(user: User): Promise<GetMyFassionListOutput>;
     getAllFassionList(): Promise<GetMyFassionListOutput>;
 }

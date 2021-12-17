@@ -8,7 +8,7 @@ export declare class FassionResolver {
     private readonly fassionService;
     constructor(fassionService: FassionService);
     createFaaion(user: User, createFassionInput: CreateFassionInput): Promise<CreateFassionOutput>;
-    deleteFassion(user: User, deleteFassionInput: DeleteFassionInput): Promise<DeleteFassionOutput>;
+    deleteFassion(deleteFassionInput: DeleteFassionInput): Promise<DeleteFassionOutput>;
     getMyFassionList(user: User): Promise<GetMyFassionListOutput>;
     getAllFassionList(): Promise<GetAllFassionListOutput>;
 }

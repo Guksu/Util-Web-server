@@ -12,64 +12,82 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FassionService = void 0;
+exports.FoodBoardService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../user/entitiy/user.entity");
 const typeorm_2 = require("typeorm");
-const fassion_entity_1 = require("./entitiy/fassion.entity");
-let FassionService = class FassionService {
-    constructor(fassion) {
-        this.fassion = fassion;
+const food_board_entity_1 = require("./entitiy/food-board.entity");
+let FoodBoardService = class FoodBoardService {
+    constructor(foodBoard) {
+        this.foodBoard = foodBoard;
     }
-    async createFassion(user, { date, imgUrl, secret }) {
+    async createReview(user, { category, content, date, imgUrl, title }) {
         try {
-            const newFassion = await this.fassion.create({
+            const newReview = await this.foodBoard.create({
+                category,
+                content,
                 date,
                 imgUrl,
-                secret,
+                title,
                 user: user['user'],
             });
-            await this.fassion.save(newFassion);
+            await this.foodBoard.save(newReview);
             return { ok: true };
         }
         catch (error) {
             return { ok: false, error: error };
         }
     }
-    async deleteFassion({ fassionNo, }) {
+    async editReview({ FoodBoardNo, category, content, date, imgUrl, title, }) {
         try {
-            const checkFassion = await this.fassion.findOne({ fassionNo });
-            await this.fassion.delete(checkFassion);
+            const checkReview = await this.foodBoard.findOne({ FoodBoardNo });
+            if (category)
+                checkReview.category = category;
+            if (content)
+                checkReview.content = content;
+            if (date)
+                checkReview.date = date;
+            if (imgUrl)
+                checkReview.imgUrl = imgUrl;
+            if (title)
+                checkReview.title = title;
+            await this.foodBoard.save(checkReview);
+            return { ok: true };
+        }
+        catch ({ error }) {
+            return { ok: false, error: error };
+        }
+    }
+    async deleteReview(user, { FoodBoardNo }) {
+        try {
+            const checkReview = await this.foodBoard.findOne({
+                user: user['user'],
+                FoodBoardNo,
+            });
+            if (!checkReview)
+                return { ok: false, error: '작성글이 없습니다.' };
+            await this.foodBoard.delete(checkReview);
             return { ok: true };
         }
         catch (error) {
             return { ok: false, error: error };
         }
     }
-    async getMyFassionList(user) {
+    async getFoodReviewList() {
         try {
-            const getFassion = await this.fassion.find({ user: user['user'] });
-            return { ok: true, fassion: getFassion };
-        }
-        catch (error) {
-            return { ok: false, error: error };
-        }
-    }
-    async getAllFassionList() {
-        try {
-            const getFassion = await this.fassion.find({ secret: 'yes' });
-            return { ok: true, fassion: getFassion };
+            const getReviwList = await this.foodBoard.find();
+            return { ok: true, review: getReviwList };
         }
         catch (error) {
             return { ok: false, error: error };
         }
     }
 };
-FassionService = __decorate([
+FoodBoardService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, typeorm_1.InjectRepository)(fassion_entity_1.Fassion)),
+    __param(0, (0, typeorm_1.InjectRepository)(food_board_entity_1.FoodBoard)),
     __metadata("design:paramtypes", [typeorm_2.Repository])
-], FassionService);
-exports.FassionService = FassionService;
-//# sourceMappingURL=fassion.service.js.map
+], FoodBoardService);
+exports.FoodBoardService = FoodBoardService;
+//# sourceMappingURL=food-board.service.js.map

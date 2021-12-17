@@ -9,7 +9,7 @@ import { UserService } from './user.service';
 export declare class UserResolver {
     private readonly userService;
     constructor(userService: UserService);
-    creataeUser(createUserInput: CreateUserInput): Promise<CreateUserOutput>;
+    createUser(createUserInput: CreateUserInput): Promise<CreateUserOutput>;
     login(loginInput: LoginInput): Promise<LoginOutput>;
     profileInfo(user: User): Promise<ProfileInfoOutput>;
     changePw(user: User, changePwInput: ChangePwInput): Promise<ChangePwOutput>;

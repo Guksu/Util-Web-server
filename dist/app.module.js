@@ -18,6 +18,8 @@ const account_module_1 = require("./account/account.module");
 const account_entity_1 = require("./account/entitiy/account.entity");
 const fassion_module_1 = require("./fassion/fassion.module");
 const fassion_entity_1 = require("./fassion/entitiy/fassion.entity");
+const food_board_module_1 = require("./food-board/food-board.module");
+const food_board_entity_1 = require("./food-board/entitiy/food-board.entity");
 require('dotenv').config();
 let AppModule = class AppModule {
 };
@@ -31,7 +33,7 @@ AppModule = __decorate([
                 username: 'root',
                 password: process.env.PASSWORD,
                 database: 'util-web',
-                entities: [user_entity_1.User, account_entity_1.Account, fassion_entity_1.Fassion],
+                entities: [user_entity_1.User, account_entity_1.Account, fassion_entity_1.Fassion, food_board_entity_1.FoodBoard],
                 synchronize: true,
             }),
             graphql_1.GraphQLModule.forRoot({
@@ -51,6 +53,7 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             account_module_1.AccountModule,
             fassion_module_1.FassionModule,
+            food_board_module_1.FoodBoardModule,
         ],
         controllers: [],
         providers: [],

@@ -17,6 +17,7 @@ const typeorm_1 = require("typeorm");
 const bcrypt = require("bcrypt");
 const account_entity_1 = require("../../account/entitiy/account.entity");
 const fassion_entity_1 = require("../../fassion/entitiy/fassion.entity");
+const food_board_entity_1 = require("../../food-board/entitiy/food-board.entity");
 let User = class User {
     async hashPassword() {
         if (this.password) {
@@ -82,6 +83,13 @@ __decorate([
     (0, graphql_1.Field)((type) => [fassion_entity_1.Fassion], { nullable: true }),
     __metadata("design:type", Array)
 ], User.prototype, "fassion", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)((type) => food_board_entity_1.FoodBoard, (Fassion) => Fassion.user, {
+        onDelete: 'CASCADE',
+    }),
+    (0, graphql_1.Field)((type) => [food_board_entity_1.FoodBoard], { nullable: true }),
+    __metadata("design:type", Array)
+], User.prototype, "foodBoard", void 0);
 __decorate([
     (0, typeorm_1.BeforeInsert)(),
     (0, typeorm_1.BeforeUpdate)(),

@@ -12,71 +12,73 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FassionResolver = void 0;
+exports.FoodBoardResolver = void 0;
 const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
 const auth_guard_1 = require("../auth/auth.guard");
 const auth_user_decorator_1 = require("../auth/auth.user-decorator");
 const user_entity_1 = require("../user/entitiy/user.entity");
-const createFassion_dto_1 = require("./dto/createFassion.dto");
-const deleteFassion_dto_1 = require("./dto/deleteFassion.dto");
-const getAllFassionList_dto_1 = require("./dto/getAllFassionList.dto");
-const getMyFassionList_dto_1 = require("./dto/getMyFassionList.dto");
-const fassion_service_1 = require("./fassion.service");
-let FassionResolver = class FassionResolver {
-    constructor(fassionService) {
-        this.fassionService = fassionService;
+const createReview_dto_1 = require("./dto/createReview.dto");
+const deleteReview_dto_1 = require("./dto/deleteReview.dto");
+const editReview_dto_1 = require("./dto/editReview.dto");
+const getFoodReviewList_dto_1 = require("./dto/getFoodReviewList.dto");
+const food_board_service_1 = require("./food-board.service");
+let FoodBoardResolver = class FoodBoardResolver {
+    constructor(foodBoardService) {
+        this.foodBoardService = foodBoardService;
     }
-    createFaaion(user, createFassionInput) {
-        return this.fassionService.createFassion(user, createFassionInput);
+    createReview(user, createReviewInput) {
+        return this.foodBoardService.createReview(user, createReviewInput);
     }
-    deleteFassion(deleteFassionInput) {
-        return this.fassionService.deleteFassion(deleteFassionInput);
+    editReview(editReviewInput) {
+        return this.foodBoardService.editReview(editReviewInput);
     }
-    getMyFassionList(user) {
-        return this.fassionService.getMyFassionList(user);
+    deleteReview(user, deleteReviewInput) {
+        return this.foodBoardService.deleteReview(user, deleteReviewInput);
     }
-    getAllFassionList() {
-        return this.fassionService.getAllFassionList();
+    getFoodReviewList() {
+        return this.foodBoardService.getFoodReviewList();
     }
 };
 __decorate([
-    (0, graphql_1.Mutation)((type) => createFassion_dto_1.CreateFassionOutput),
+    (0, graphql_1.Mutation)((type) => createReview_dto_1.CreateReviewOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
     __param(0, (0, auth_user_decorator_1.GetUser)()),
     __param(1, (0, graphql_1.Args)('input')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [user_entity_1.User,
-        createFassion_dto_1.CreateFassionInput]),
+        createReview_dto_1.CreateReviewInput]),
     __metadata("design:returntype", Promise)
-], FassionResolver.prototype, "createFaaion", null);
+], FoodBoardResolver.prototype, "createReview", null);
 __decorate([
-    (0, graphql_1.Mutation)((type) => deleteFassion_dto_1.DeleteFassionOutput),
+    (0, graphql_1.Mutation)((type) => editReview_dto_1.EditReviewOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
     __param(0, (0, auth_user_decorator_1.GetUser)()),
     __param(0, (0, graphql_1.Args)('input')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [deleteFassion_dto_1.DeleteFassionInput]),
+    __metadata("design:paramtypes", [editReview_dto_1.EditReviewInput]),
     __metadata("design:returntype", Promise)
-], FassionResolver.prototype, "deleteFassion", null);
+], FoodBoardResolver.prototype, "editReview", null);
 __decorate([
-    (0, graphql_1.Query)((type) => getMyFassionList_dto_1.GetMyFassionListOutput),
+    (0, graphql_1.Mutation)((type) => deleteReview_dto_1.DeleteReviewOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
     __param(0, (0, auth_user_decorator_1.GetUser)()),
+    __param(1, (0, graphql_1.Args)('input')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_entity_1.User]),
+    __metadata("design:paramtypes", [user_entity_1.User,
+        deleteReview_dto_1.DeleteReviewInput]),
     __metadata("design:returntype", Promise)
-], FassionResolver.prototype, "getMyFassionList", null);
+], FoodBoardResolver.prototype, "deleteReview", null);
 __decorate([
-    (0, graphql_1.Query)((type) => getAllFassionList_dto_1.GetAllFassionListOutput),
+    (0, graphql_1.Query)((type) => getFoodReviewList_dto_1.GetFoodReviewListOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], FassionResolver.prototype, "getAllFassionList", null);
-FassionResolver = __decorate([
+], FoodBoardResolver.prototype, "getFoodReviewList", null);
+FoodBoardResolver = __decorate([
     (0, graphql_1.Resolver)(),
-    __metadata("design:paramtypes", [fassion_service_1.FassionService])
-], FassionResolver);
-exports.FassionResolver = FassionResolver;
-//# sourceMappingURL=fassion.resolver.js.map
+    __metadata("design:paramtypes", [food_board_service_1.FoodBoardService])
+], FoodBoardResolver);
+exports.FoodBoardResolver = FoodBoardResolver;
+//# sourceMappingURL=food-board.resolver.js.map
