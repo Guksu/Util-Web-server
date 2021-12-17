@@ -11,6 +11,7 @@ import {
   DeleteAccountOutput,
 } from './dto/deleteAccount.dto';
 import { EditAccountInput, EditAccountOutput } from './dto/editAccount.dto';
+import { GetAccountListOutput } from './dto/getAccountList.dto';
 import { Account } from './entitiy/account.entity';
 
 @Injectable()
@@ -70,6 +71,16 @@ export class AccountService {
       await this.account.delete(checkAccount);
 
       return { ok: true };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async getAccountList(user: User): Promise<GetAccountListOutput> {
+    try {
+      const checkAccount = await this.account.find({ user: user['user'] });
+
+      return { ok: true, account: checkAccount };
     } catch (error) {
       return { ok: false, error: error };
     }

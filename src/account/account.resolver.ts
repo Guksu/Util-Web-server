@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { GqlAuthGuard } from 'src/auth/auth.guard';
 import { GetUser } from 'src/auth/auth.user-decorator';
 import { User } from 'src/user/entitiy/user.entity';
@@ -13,6 +13,7 @@ import {
   DeleteAccountOutput,
 } from './dto/deleteAccount.dto';
 import { EditAccountInput, EditAccountOutput } from './dto/editAccount.dto';
+import { GetAccountListOutput } from './dto/getAccountList.dto';
 
 @Resolver()
 export class AccountResolver {
@@ -43,5 +44,11 @@ export class AccountResolver {
     @Args('input') delteAccountInput: DeleteAccountInput,
   ): Promise<DeleteAccountOutput> {
     return this.accountService.deleteAccount(user, delteAccountInput);
+  }
+
+  @Query((type) => GetAccountListOutput)
+  @UseGuards(GqlAuthGuard)
+  getAccountListOutput(@GetUser() user: User): Promise<GetAccountListOutput> {
+    return this.accountService.getAccountList(user);
   }
 }

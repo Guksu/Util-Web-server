@@ -67,6 +67,15 @@ let AccountService = class AccountService {
             return { ok: false, error: error };
         }
     }
+    async getAccountList(user) {
+        try {
+            const checkAccount = await this.account.find({ user: user['user'] });
+            return { ok: true, account: checkAccount };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
 };
 AccountService = __decorate([
     (0, common_1.Injectable)(),
