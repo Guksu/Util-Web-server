@@ -18,7 +18,6 @@ import { Account } from './entitiy/account.entity';
 export class AccountService {
   constructor(
     @InjectRepository(Account) private readonly account: Repository<Account>,
-    @InjectRepository(User) private readonly user: Repository<User>,
   ) {}
 
   async createAccount(
@@ -31,9 +30,8 @@ export class AccountService {
         category,
         date,
         type,
+        user: user['user'],
       });
-
-      newAccount.user = user['user'];
 
       await this.account.save(newAccount);
 

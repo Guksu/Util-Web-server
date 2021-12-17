@@ -7,8 +7,7 @@ import { GetAccountListOutput } from './dto/getAccountList.dto';
 import { Account } from './entitiy/account.entity';
 export declare class AccountService {
     private readonly account;
-    private readonly user;
-    constructor(account: Repository<Account>, user: Repository<User>);
+    constructor(account: Repository<Account>);
     createAccount(user: User, { amount, category, date, type }: CreateAccountInput): Promise<CreateAccountOutput>;
     editAccount(user: User, { accountNo, amount, category, date, type }: EditAccountInput): Promise<EditAccountOutput>;
     deleteAccount(user: User, { accountNo }: DeleteAccountInput): Promise<DeleteAccountOutput>;

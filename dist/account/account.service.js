@@ -19,9 +19,8 @@ const user_entity_1 = require("../user/entitiy/user.entity");
 const typeorm_2 = require("typeorm");
 const account_entity_1 = require("./entitiy/account.entity");
 let AccountService = class AccountService {
-    constructor(account, user) {
+    constructor(account) {
         this.account = account;
-        this.user = user;
     }
     async createAccount(user, { amount, category, date, type }) {
         try {
@@ -30,8 +29,8 @@ let AccountService = class AccountService {
                 category,
                 date,
                 type,
+                user: user['user'],
             });
-            newAccount.user = user['user'];
             await this.account.save(newAccount);
             return { ok: true };
         }
@@ -80,9 +79,7 @@ let AccountService = class AccountService {
 AccountService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(account_entity_1.Account)),
-    __param(1, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], AccountService);
 exports.AccountService = AccountService;
 //# sourceMappingURL=account.service.js.map

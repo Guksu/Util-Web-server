@@ -6,20 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AccountModule = void 0;
+exports.FassionModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const account_resolver_1 = require("./account.resolver");
-const account_service_1 = require("./account.service");
-const account_entity_1 = require("./entitiy/account.entity");
-let AccountModule = class AccountModule {
+const fassion_entity_1 = require("./entitiy/fassion.entity");
+const fassion_resolver_1 = require("./fassion.resolver");
+const fassion_service_1 = require("./fassion.service");
+let FassionModule = class FassionModule {
 };
-AccountModule = __decorate([
+FassionModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([account_entity_1.Account])],
-        providers: [account_resolver_1.AccountResolver, account_service_1.AccountService],
-        exports: [account_service_1.AccountService],
+        imports: [typeorm_1.TypeOrmModule.forFeature([fassion_entity_1.Fassion])],
+        providers: [fassion_resolver_1.FassionResolver, fassion_service_1.FassionService],
+        exports: [fassion_service_1.FassionService],
     })
-], AccountModule);
-exports.AccountModule = AccountModule;
-//# sourceMappingURL=account.module.js.map
+], FassionModule);
+exports.FassionModule = FassionModule;
+//# sourceMappingURL=fassion.module.js.map

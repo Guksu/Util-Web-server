@@ -16,6 +16,8 @@ const common_module_1 = require("./common/common.module");
 const auth_module_1 = require("./auth/auth.module");
 const account_module_1 = require("./account/account.module");
 const account_entity_1 = require("./account/entitiy/account.entity");
+const fassion_module_1 = require("./fassion/fassion.module");
+const fassion_entity_1 = require("./fassion/entitiy/fassion.entity");
 require('dotenv').config();
 let AppModule = class AppModule {
 };
@@ -29,7 +31,7 @@ AppModule = __decorate([
                 username: 'root',
                 password: process.env.PASSWORD,
                 database: 'util-web',
-                entities: [user_entity_1.User, account_entity_1.Account],
+                entities: [user_entity_1.User, account_entity_1.Account, fassion_entity_1.Fassion],
                 synchronize: true,
             }),
             graphql_1.GraphQLModule.forRoot({
@@ -48,6 +50,7 @@ AppModule = __decorate([
             common_module_1.CommonModule,
             auth_module_1.AuthModule,
             account_module_1.AccountModule,
+            fassion_module_1.FassionModule,
         ],
         controllers: [],
         providers: [],

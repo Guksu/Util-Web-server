@@ -16,6 +16,7 @@ const class_validator_1 = require("class-validator");
 const typeorm_1 = require("typeorm");
 const bcrypt = require("bcrypt");
 const account_entity_1 = require("../../account/entitiy/account.entity");
+const fassion_entity_1 = require("../../fassion/entitiy/fassion.entity");
 let User = class User {
     async hashPassword() {
         if (this.password) {
@@ -74,6 +75,13 @@ __decorate([
     (0, graphql_1.Field)((type) => [account_entity_1.Account], { nullable: true }),
     __metadata("design:type", Array)
 ], User.prototype, "account", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)((type) => fassion_entity_1.Fassion, (Fassion) => Fassion.user, {
+        onDelete: 'CASCADE',
+    }),
+    (0, graphql_1.Field)((type) => [fassion_entity_1.Fassion], { nullable: true }),
+    __metadata("design:type", Array)
+], User.prototype, "fassion", void 0);
 __decorate([
     (0, typeorm_1.BeforeInsert)(),
     (0, typeorm_1.BeforeUpdate)(),

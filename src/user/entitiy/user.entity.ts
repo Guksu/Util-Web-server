@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Account } from 'src/account/entitiy/account.entity';
+import { Fassion } from 'src/fassion/entitiy/fassion.entity';
 
 @InputType('UserInputType', { isAbstract: true })
 @ObjectType()
@@ -45,6 +46,12 @@ export class User {
   })
   @Field((type) => [Account], { nullable: true })
   account: [Account];
+
+  @OneToMany((type) => Fassion, (Fassion) => Fassion.user, {
+    onDelete: 'CASCADE',
+  })
+  @Field((type) => [Fassion], { nullable: true })
+  fassion: [Fassion];
 
   @BeforeInsert()
   @BeforeUpdate()
