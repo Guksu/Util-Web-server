@@ -41,10 +41,13 @@ export class AccountService {
     }
   }
 
-  async editAccount(
-    user: User,
-    { accountNo, amount, category, date, type }: EditAccountInput,
-  ): Promise<EditAccountOutput> {
+  async editAccount({
+    accountNo,
+    amount,
+    category,
+    date,
+    type,
+  }: EditAccountInput): Promise<EditAccountOutput> {
     try {
       const checkAccount = await this.account.findOne({ accountNo });
       if (amount) checkAccount.amount = amount;
@@ -59,10 +62,9 @@ export class AccountService {
     }
   }
 
-  async deleteAccount(
-    user: User,
-    { accountNo }: DeleteAccountInput,
-  ): Promise<DeleteAccountOutput> {
+  async deleteAccount({
+    accountNo,
+  }: DeleteAccountInput): Promise<DeleteAccountOutput> {
     try {
       const checkAccount = await this.account.findOne({ accountNo });
 

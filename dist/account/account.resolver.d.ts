@@ -8,7 +8,7 @@ export declare class AccountResolver {
     private readonly accountService;
     constructor(accountService: AccountService);
     createAccount(user: User, createAccountInput: CreateAccountInput): Promise<CreateAccountOutput>;
-    edtiAccount(user: User, editAccountInput: EditAccountInput): Promise<EditAccountOutput>;
-    deleteAccount(user: User, delteAccountInput: DeleteAccountInput): Promise<DeleteAccountOutput>;
+    edtiAccount(editAccountInput: EditAccountInput): Promise<EditAccountOutput>;
+    deleteAccount(delteAccountInput: DeleteAccountInput): Promise<DeleteAccountOutput>;
     getAccountListOutput(user: User): Promise<GetAccountListOutput>;
 }

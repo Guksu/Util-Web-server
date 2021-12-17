@@ -10,4 +10,5 @@ export declare class FassionService {
     createFassion(user: User, { date, imgUrl, secret }: CreateFassionInput): Promise<CreateFassionOutput>;
     deleteFassion(user: User, { fassionNo }: DeleteFassionInput): Promise<DeleteFassionOutput>;
     getMyFassionList(user: User): Promise<GetMyFassionListOutput>;
+    getAllFassionList(): Promise<GetMyFassionListOutput>;
 }

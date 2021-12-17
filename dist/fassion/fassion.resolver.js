@@ -20,6 +20,7 @@ const auth_user_decorator_1 = require("../auth/auth.user-decorator");
 const user_entity_1 = require("../user/entitiy/user.entity");
 const createFassion_dto_1 = require("./dto/createFassion.dto");
 const deleteFassion_dto_1 = require("./dto/deleteFassion.dto");
+const getAllFassionList_dto_1 = require("./dto/getAllFassionList.dto");
 const getMyFassionList_dto_1 = require("./dto/getMyFassionList.dto");
 const fassion_service_1 = require("./fassion.service");
 let FassionResolver = class FassionResolver {
@@ -34,6 +35,9 @@ let FassionResolver = class FassionResolver {
     }
     getMyFassionList(user) {
         return this.fassionService.getMyFassionList(user);
+    }
+    getAllFassionList() {
+        return this.fassionService.getAllFassionList();
     }
 };
 __decorate([
@@ -64,6 +68,13 @@ __decorate([
     __metadata("design:paramtypes", [user_entity_1.User]),
     __metadata("design:returntype", Promise)
 ], FassionResolver.prototype, "getMyFassionList", null);
+__decorate([
+    (0, graphql_1.Query)((type) => getAllFassionList_dto_1.GetAllFassionListOutput),
+    (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], FassionResolver.prototype, "getAllFassionList", null);
 FassionResolver = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [fassion_service_1.FassionService])

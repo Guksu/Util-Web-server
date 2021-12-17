@@ -38,7 +38,7 @@ let AccountService = class AccountService {
             return { ok: false, error: error };
         }
     }
-    async editAccount(user, { accountNo, amount, category, date, type }) {
+    async editAccount({ accountNo, amount, category, date, type, }) {
         try {
             const checkAccount = await this.account.findOne({ accountNo });
             if (amount)
@@ -56,7 +56,7 @@ let AccountService = class AccountService {
             return { ok: false, error: error };
         }
     }
-    async deleteAccount(user, { accountNo }) {
+    async deleteAccount({ accountNo, }) {
         try {
             const checkAccount = await this.account.findOne({ accountNo });
             await this.account.delete(checkAccount);

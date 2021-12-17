@@ -30,11 +30,11 @@ let AccountResolver = class AccountResolver {
     createAccount(user, createAccountInput) {
         return this.accountService.createAccount(user, createAccountInput);
     }
-    edtiAccount(user, editAccountInput) {
-        return this.accountService.editAccount(user, editAccountInput);
+    edtiAccount(editAccountInput) {
+        return this.accountService.editAccount(editAccountInput);
     }
-    deleteAccount(user, delteAccountInput) {
-        return this.accountService.deleteAccount(user, delteAccountInput);
+    deleteAccount(delteAccountInput) {
+        return this.accountService.deleteAccount(delteAccountInput);
     }
     getAccountListOutput(user) {
         return this.accountService.getAccountList(user);
@@ -53,21 +53,17 @@ __decorate([
 __decorate([
     (0, graphql_1.Mutation)((type) => editAccount_dto_1.EditAccountOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
-    __param(0, (0, auth_user_decorator_1.GetUser)()),
-    __param(1, (0, graphql_1.Args)('input')),
+    __param(0, (0, graphql_1.Args)('input')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_entity_1.User,
-        editAccount_dto_1.EditAccountInput]),
+    __metadata("design:paramtypes", [editAccount_dto_1.EditAccountInput]),
     __metadata("design:returntype", Promise)
 ], AccountResolver.prototype, "edtiAccount", null);
 __decorate([
     (0, graphql_1.Mutation)((type) => deleteAccount_dto_1.DeleteAccountOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
-    __param(0, (0, auth_user_decorator_1.GetUser)()),
-    __param(1, (0, graphql_1.Args)('input')),
+    __param(0, (0, graphql_1.Args)('input')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [user_entity_1.User,
-        deleteAccount_dto_1.DeleteAccountInput]),
+    __metadata("design:paramtypes", [deleteAccount_dto_1.DeleteAccountInput]),
     __metadata("design:returntype", Promise)
 ], AccountResolver.prototype, "deleteAccount", null);
 __decorate([

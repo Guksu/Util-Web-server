@@ -56,6 +56,15 @@ let FassionService = class FassionService {
             return { ok: false, error: error };
         }
     }
+    async getAllFassionList() {
+        try {
+            const getFassion = await this.fassion.find({ secret: 'yes' });
+            return { ok: true, fassion: getFassion };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
 };
 FassionService = __decorate([
     (0, common_1.Injectable)(),

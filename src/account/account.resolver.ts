@@ -31,19 +31,17 @@ export class AccountResolver {
   @Mutation((type) => EditAccountOutput)
   @UseGuards(GqlAuthGuard)
   edtiAccount(
-    @GetUser() user: User,
     @Args('input') editAccountInput: EditAccountInput,
   ): Promise<EditAccountOutput> {
-    return this.accountService.editAccount(user, editAccountInput);
+    return this.accountService.editAccount(editAccountInput);
   }
 
   @Mutation((type) => DeleteAccountOutput)
   @UseGuards(GqlAuthGuard)
   deleteAccount(
-    @GetUser() user: User,
     @Args('input') delteAccountInput: DeleteAccountInput,
   ): Promise<DeleteAccountOutput> {
-    return this.accountService.deleteAccount(user, delteAccountInput);
+    return this.accountService.deleteAccount(delteAccountInput);
   }
 
   @Query((type) => GetAccountListOutput)

@@ -11,6 +11,7 @@ import {
   DeleteFassionInput,
   DeleteFassionOutput,
 } from './dto/deleteFassion.dto';
+import { GetAllFassionListOutput } from './dto/getAllFassionList.dto';
 import { GetMyFassionListOutput } from './dto/getMyFassionList.dto';
 import { FassionService } from './fassion.service';
 
@@ -40,5 +41,11 @@ export class FassionResolver {
   @UseGuards(GqlAuthGuard)
   getMyFassionList(@GetUser() user: User): Promise<GetMyFassionListOutput> {
     return this.fassionService.getMyFassionList(user);
+  }
+
+  @Query((type) => GetAllFassionListOutput)
+  @UseGuards(GqlAuthGuard)
+  getAllFassionList(): Promise<GetAllFassionListOutput> {
+    return this.fassionService.getAllFassionList();
   }
 }

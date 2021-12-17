@@ -62,4 +62,14 @@ export class FassionService {
       return { ok: false, error: error };
     }
   }
+
+  async getAllFassionList(): Promise<GetMyFassionListOutput> {
+    try {
+      const getFassion = await this.fassion.find({ secret: 'yes' });
+
+      return { ok: true, fassion: getFassion };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
 }

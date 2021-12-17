@@ -9,7 +9,7 @@ export declare class AccountService {
     private readonly account;
     constructor(account: Repository<Account>);
     createAccount(user: User, { amount, category, date, type }: CreateAccountInput): Promise<CreateAccountOutput>;
-    editAccount(user: User, { accountNo, amount, category, date, type }: EditAccountInput): Promise<EditAccountOutput>;
-    deleteAccount(user: User, { accountNo }: DeleteAccountInput): Promise<DeleteAccountOutput>;
+    editAccount({ accountNo, amount, category, date, type, }: EditAccountInput): Promise<EditAccountOutput>;
+    deleteAccount({ accountNo, }: DeleteAccountInput): Promise<DeleteAccountOutput>;
     getAccountList(user: User): Promise<GetAccountListOutput>;
 }
