@@ -10,5 +10,5 @@ export declare class AccountResolver {
     createAccount(user: User, createAccountInput: CreateAccountInput): Promise<CreateAccountOutput>;
     edtiAccount(editAccountInput: EditAccountInput): Promise<EditAccountOutput>;
     deleteAccount(delteAccountInput: DeleteAccountInput): Promise<DeleteAccountOutput>;
-    getAccountListOutput(user: User): Promise<GetAccountListOutput>;
+    getAccountList(user: User): Promise<GetAccountListOutput>;
 }

@@ -36,7 +36,7 @@ let AccountResolver = class AccountResolver {
     deleteAccount(delteAccountInput) {
         return this.accountService.deleteAccount(delteAccountInput);
     }
-    getAccountListOutput(user) {
+    getAccountList(user) {
         return this.accountService.getAccountList(user);
     }
 };
@@ -73,7 +73,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [user_entity_1.User]),
     __metadata("design:returntype", Promise)
-], AccountResolver.prototype, "getAccountListOutput", null);
+], AccountResolver.prototype, "getAccountList", null);
 AccountResolver = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [account_service_1.AccountService])

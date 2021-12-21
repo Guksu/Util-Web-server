@@ -46,7 +46,7 @@ export class AccountResolver {
 
   @Query((type) => GetAccountListOutput)
   @UseGuards(GqlAuthGuard)
-  getAccountListOutput(@GetUser() user: User): Promise<GetAccountListOutput> {
+  getAccountList(@GetUser() user: User): Promise<GetAccountListOutput> {
     return this.accountService.getAccountList(user);
   }
 }
