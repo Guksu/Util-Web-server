@@ -12,7 +12,6 @@ import {
   DeleteAccountInput,
   DeleteAccountOutput,
 } from './dto/deleteAccount.dto';
-import { EditAccountInput, EditAccountOutput } from './dto/editAccount.dto';
 import { GetAccountListOutput } from './dto/getAccountList.dto';
 
 @Resolver()
@@ -26,14 +25,6 @@ export class AccountResolver {
     @Args('input') createAccountInput: CreateAccountInput,
   ): Promise<CreateAccountOutput> {
     return this.accountService.createAccount(user, createAccountInput);
-  }
-
-  @Mutation((type) => EditAccountOutput)
-  @UseGuards(GqlAuthGuard)
-  edtiAccount(
-    @Args('input') editAccountInput: EditAccountInput,
-  ): Promise<EditAccountOutput> {
-    return this.accountService.editAccount(editAccountInput);
   }
 
   @Mutation((type) => DeleteAccountOutput)

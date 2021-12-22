@@ -10,7 +10,6 @@ import {
   DeleteAccountInput,
   DeleteAccountOutput,
 } from './dto/deleteAccount.dto';
-import { EditAccountInput, EditAccountOutput } from './dto/editAccount.dto';
 import { GetAccountListOutput } from './dto/getAccountList.dto';
 import { Account } from './entitiy/account.entity';
 
@@ -35,27 +34,6 @@ export class AccountService {
 
       await this.account.save(newAccount);
 
-      return { ok: true };
-    } catch (error) {
-      return { ok: false, error: error };
-    }
-  }
-
-  async editAccount({
-    accountNo,
-    amount,
-    category,
-    date,
-    type,
-  }: EditAccountInput): Promise<EditAccountOutput> {
-    try {
-      const checkAccount = await this.account.findOne({ accountNo });
-      if (amount) checkAccount.amount = amount;
-      if (category) checkAccount.category = category;
-      if (date) checkAccount.date = date;
-      if (type) checkAccount.type = type;
-
-      await this.account.save(checkAccount);
       return { ok: true };
     } catch (error) {
       return { ok: false, error: error };

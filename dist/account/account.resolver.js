@@ -21,7 +21,6 @@ const user_entity_1 = require("../user/entitiy/user.entity");
 const account_service_1 = require("./account.service");
 const createAccount_dto_1 = require("./dto/createAccount.dto");
 const deleteAccount_dto_1 = require("./dto/deleteAccount.dto");
-const editAccount_dto_1 = require("./dto/editAccount.dto");
 const getAccountList_dto_1 = require("./dto/getAccountList.dto");
 let AccountResolver = class AccountResolver {
     constructor(accountService) {
@@ -29,9 +28,6 @@ let AccountResolver = class AccountResolver {
     }
     createAccount(user, createAccountInput) {
         return this.accountService.createAccount(user, createAccountInput);
-    }
-    edtiAccount(editAccountInput) {
-        return this.accountService.editAccount(editAccountInput);
     }
     deleteAccount(delteAccountInput) {
         return this.accountService.deleteAccount(delteAccountInput);
@@ -50,14 +46,6 @@ __decorate([
         createAccount_dto_1.CreateAccountInput]),
     __metadata("design:returntype", Promise)
 ], AccountResolver.prototype, "createAccount", null);
-__decorate([
-    (0, graphql_1.Mutation)((type) => editAccount_dto_1.EditAccountOutput),
-    (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
-    __param(0, (0, graphql_1.Args)('input')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [editAccount_dto_1.EditAccountInput]),
-    __metadata("design:returntype", Promise)
-], AccountResolver.prototype, "edtiAccount", null);
 __decorate([
     (0, graphql_1.Mutation)((type) => deleteAccount_dto_1.DeleteAccountOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),

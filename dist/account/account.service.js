@@ -38,24 +38,6 @@ let AccountService = class AccountService {
             return { ok: false, error: error };
         }
     }
-    async editAccount({ accountNo, amount, category, date, type, }) {
-        try {
-            const checkAccount = await this.account.findOne({ accountNo });
-            if (amount)
-                checkAccount.amount = amount;
-            if (category)
-                checkAccount.category = category;
-            if (date)
-                checkAccount.date = date;
-            if (type)
-                checkAccount.type = type;
-            await this.account.save(checkAccount);
-            return { ok: true };
-        }
-        catch (error) {
-            return { ok: false, error: error };
-        }
-    }
     async deleteAccount({ accountNo, }) {
         try {
             const checkAccount = await this.account.findOne({ accountNo });
