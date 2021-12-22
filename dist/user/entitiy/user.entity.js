@@ -64,8 +64,12 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    (0, graphql_1.Field)((type) => String, { nullable: true }),
+    (0, typeorm_1.Column)({
+        default: 'https://guksuintengiblemarketuplaodsol6425.s3.ap-northeast-2.amazonaws.com/1640157848694icons8-user-64.png',
+    }),
+    (0, graphql_1.Field)((type) => String, {
+        defaultValue: 'https://guksuintengiblemarketuplaodsol6425.s3.ap-northeast-2.amazonaws.com/1640157848694icons8-user-64.png',
+    }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], User.prototype, "userImgUrl", void 0);
