@@ -11,6 +11,7 @@ import { FassionModule } from './fassion/fassion.module';
 import { Fassion } from './fassion/entitiy/fassion.entity';
 import { FoodBoardModule } from './food-board/food-board.module';
 import { FoodBoard } from './food-board/entitiy/food-board.entity';
+import { UploadsModule } from './uploads/uploads.module';
 require('dotenv').config();
 
 @Module({
@@ -42,6 +43,7 @@ require('dotenv').config();
     AccountModule,
     FassionModule,
     FoodBoardModule,
+    UploadsModule,
   ],
   controllers: [],
   providers: [],
