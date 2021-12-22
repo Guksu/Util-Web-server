@@ -20,6 +20,7 @@ const fassion_module_1 = require("./fassion/fassion.module");
 const fassion_entity_1 = require("./fassion/entitiy/fassion.entity");
 const food_board_module_1 = require("./food-board/food-board.module");
 const food_board_entity_1 = require("./food-board/entitiy/food-board.entity");
+const uploads_module_1 = require("./uploads/uploads.module");
 require('dotenv').config();
 let AppModule = class AppModule {
 };
@@ -54,6 +55,7 @@ AppModule = __decorate([
             account_module_1.AccountModule,
             fassion_module_1.FassionModule,
             food_board_module_1.FoodBoardModule,
+            uploads_module_1.UploadsModule,
         ],
         controllers: [],
         providers: [],
