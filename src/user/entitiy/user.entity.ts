@@ -3,7 +3,6 @@ import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { IsString } from 'class-validator';
 import {
   BeforeInsert,
-  BeforeUpdate,
   Column,
   Entity,
   OneToMany,
@@ -61,7 +60,6 @@ export class User {
   foodBoard: [FoodBoard];
 
   @BeforeInsert()
-  @BeforeUpdate()
   async hashPassword(): Promise<void> {
     if (this.password) {
       try {

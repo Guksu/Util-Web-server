@@ -18,6 +18,7 @@ const jwt_1 = require("@nestjs/jwt");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./entitiy/user.entity");
+const bcrypt = require("bcrypt");
 let UserService = class UserService {
     constructor(user, jwtService) {
         this.user = user;
@@ -79,6 +80,7 @@ let UserService = class UserService {
                     ok: false,
                     error: '로그인 오류 혹은 계정이 없습니다',
                 };
+            password = await bcrypt.hash(password, 10);
             findUser[0].password = password;
             await this.user.save(findUser[0]);
             return { ok: true };

@@ -92,7 +92,6 @@ __decorate([
 ], User.prototype, "foodBoard", void 0);
 __decorate([
     (0, typeorm_1.BeforeInsert)(),
-    (0, typeorm_1.BeforeUpdate)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)

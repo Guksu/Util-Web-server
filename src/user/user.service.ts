@@ -12,6 +12,7 @@ import { DeleteUserInput, DeleteUserOutput } from './dto/deleteUser.dto';
 import { LoginInput, LoginOutput } from './dto/login.dto';
 import { ProfileInfoOutput } from './dto/profileInfo.dto';
 import { User } from './entitiy/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
@@ -87,6 +88,7 @@ export class UserService {
           ok: false,
           error: '로그인 오류 혹은 계정이 없습니다',
         };
+      password = await bcrypt.hash(password, 10);
       findUser[0].password = password;
       await this.user.save(findUser[0]);
 
@@ -109,7 +111,6 @@ export class UserService {
         };
       findUser[0].userImgUrl = userImgUrl;
       await this.user.save(findUser[0]);
-
       return { ok: true };
     } catch (error) {
       return { ok: false, error: error };
