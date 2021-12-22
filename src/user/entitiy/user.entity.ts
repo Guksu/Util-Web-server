@@ -38,11 +38,11 @@ export class User {
 
   @Column({
     default:
-      'https://guksuintengiblemarketuplaodsol6425.s3.ap-northeast-2.amazonaws.com/1640157848694icons8-user-64.png',
+      'https://guksuintengiblemarketuplaodsol6425.s3.ap-northeast-2.amazonaws.com/1640158050027user.png',
   })
   @Field((type) => String, {
     defaultValue:
-      'https://guksuintengiblemarketuplaodsol6425.s3.ap-northeast-2.amazonaws.com/1640157848694icons8-user-64.png',
+      'https://guksuintengiblemarketuplaodsol6425.s3.ap-northeast-2.amazonaws.com/1640158050027user.png',
   })
   @IsString()
   userImgUrl?: string;
