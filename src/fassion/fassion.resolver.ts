@@ -21,7 +21,7 @@ export class FassionResolver {
 
   @Mutation((type) => CreateFassionOutput)
   @UseGuards(GqlAuthGuard)
-  createFaaion(
+  createFassion(
     @GetUser() user: User,
     @Args('input') createFassionInput: CreateFassionInput,
   ): Promise<CreateFassionOutput> {

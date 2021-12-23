@@ -27,7 +27,7 @@ let FassionResolver = class FassionResolver {
     constructor(fassionService) {
         this.fassionService = fassionService;
     }
-    createFaaion(user, createFassionInput) {
+    createFassion(user, createFassionInput) {
         return this.fassionService.createFassion(user, createFassionInput);
     }
     deleteFassion(deleteFassionInput) {
@@ -49,7 +49,7 @@ __decorate([
     __metadata("design:paramtypes", [user_entity_1.User,
         createFassion_dto_1.CreateFassionInput]),
     __metadata("design:returntype", Promise)
-], FassionResolver.prototype, "createFaaion", null);
+], FassionResolver.prototype, "createFassion", null);
 __decorate([
     (0, graphql_1.Mutation)((type) => deleteFassion_dto_1.DeleteFassionOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
