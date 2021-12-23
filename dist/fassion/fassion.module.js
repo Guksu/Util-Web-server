@@ -10,6 +10,7 @@ exports.FassionModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const fassion_entity_1 = require("./entitiy/fassion.entity");
+const fassion_controller_1 = require("./fassion.controller");
 const fassion_resolver_1 = require("./fassion.resolver");
 const fassion_service_1 = require("./fassion.service");
 let FassionModule = class FassionModule {
@@ -19,6 +20,7 @@ FassionModule = __decorate([
         imports: [typeorm_1.TypeOrmModule.forFeature([fassion_entity_1.Fassion])],
         providers: [fassion_resolver_1.FassionResolver, fassion_service_1.FassionService],
         exports: [fassion_service_1.FassionService],
+        controllers: [fassion_controller_1.FassionController],
     })
 ], FassionModule);
 exports.FassionModule = FassionModule;

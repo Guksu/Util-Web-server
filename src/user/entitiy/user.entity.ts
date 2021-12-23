@@ -37,12 +37,11 @@ export class User {
   password: string;
 
   @Column({
-    default:
-      'https://guksuintengiblemarketuplaodsol6425.s3.ap-northeast-2.amazonaws.com/1640158050027user.png',
+    default: 's3://guksuintengiblemarketuplaodsol6425/1640158050027user.png',
   })
   @Field((type) => String, {
     defaultValue:
-      'https://guksuintengiblemarketuplaodsol6425.s3.ap-northeast-2.amazonaws.com/1640158050027user.png',
+      's3://guksuintengiblemarketuplaodsol6425/1640158050027user.png',
   })
   @IsString()
   userImgUrl?: string;
