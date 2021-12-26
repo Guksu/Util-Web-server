@@ -12,6 +12,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const food_board_entity_1 = require("./entitiy/food-board.entity");
 const food_board_resolver_1 = require("./food-board.resolver");
 const food_board_service_1 = require("./food-board.service");
+const food_controller_1 = require("./food.controller");
 let FoodBoardModule = class FoodBoardModule {
 };
 FoodBoardModule = __decorate([
@@ -19,6 +20,7 @@ FoodBoardModule = __decorate([
         imports: [typeorm_1.TypeOrmModule.forFeature([food_board_entity_1.FoodBoard])],
         providers: [food_board_resolver_1.FoodBoardResolver, food_board_service_1.FoodBoardService],
         exports: [food_board_service_1.FoodBoardService],
+        controllers: [food_controller_1.FoodController],
     })
 ], FoodBoardModule);
 exports.FoodBoardModule = FoodBoardModule;
