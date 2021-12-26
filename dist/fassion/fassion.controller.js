@@ -22,28 +22,26 @@ let FassionController = class FassionController {
         const SECRET_KEY = process.env.NAVER_CLIENT_SECRET;
         const temp = req.query.isTemp;
         let style;
-        {
-            parseInt(temp) <= 4 && style === `패딩`;
+        if (parseInt(temp) <= 4) {
+            style = '패딩';
         }
-        {
-            parseInt(temp) <= 8 && parseInt(temp) > 4 && style === `코트, 니트`;
+        else if (parseInt(temp) <= 8) {
+            style = `코트, 니트`;
         }
-        {
-            parseInt(temp) <= 11 && parseInt(temp) > 8 && style === `니트, 자켓`;
+        else if (parseInt(temp) <= 11) {
+            style = `니트, 자켓`;
         }
-        {
-            parseInt(temp) <= 16 && parseInt(temp) > 11 && style === `가디건, 야상`;
+        else if (parseInt(temp) <= 16) {
+            style = `가디건, 야상`;
         }
-        {
-            parseInt(temp) <= 19 && parseInt(temp) > 16 && style === `맨투맨, 가디건`;
+        else if (parseInt(temp) <= 19) {
+            style = `맨투맨, 가디건`;
         }
-        {
-            parseInt(temp) <= 22 &&
-                parseInt(temp) > 19 &&
-                style === `긴팔 , 얇은 가디건`;
+        else if (parseInt(temp) <= 22) {
+            style = `긴팔 , 얇은 가디건`;
         }
-        {
-            parseInt(temp) <= 27 && parseInt(temp) > 22 && style === `반팔 , 반바지`;
+        else if (parseInt(temp) <= 27) {
+            style = `반팔 , 반바지`;
         }
         try {
             const { data: searchData } = await axios_1.default.get('https://openapi.naver.com/v1/search/image', {
