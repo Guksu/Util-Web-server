@@ -38,9 +38,13 @@ export class FoodBoard {
 
   @Column({ default: 0 })
   @Field((type) => Number)
-  viwe: number;
+  view: number;
 
   @ManyToOne((type) => User, (User) => User.foodBoard, { cascade: true })
   @Field((type) => User)
   user: User;
+
+  @Column()
+  @Field((type) => String)
+  userName: string;
 }

@@ -29,7 +29,6 @@ let FoodController = class FoodController {
                     'X-Naver-Client-Secret': `${SECRET_KEY}`,
                 },
             });
-            console.log(searchData);
             return searchData;
         }
         catch (error) {

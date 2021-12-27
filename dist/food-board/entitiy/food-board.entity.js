@@ -55,12 +55,17 @@ __decorate([
     (0, typeorm_1.Column)({ default: 0 }),
     (0, graphql_1.Field)((type) => Number),
     __metadata("design:type", Number)
-], FoodBoard.prototype, "viwe", void 0);
+], FoodBoard.prototype, "view", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)((type) => user_entity_1.User, (User) => User.foodBoard, { cascade: true }),
     (0, graphql_1.Field)((type) => user_entity_1.User),
     __metadata("design:type", user_entity_1.User)
 ], FoodBoard.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    (0, graphql_1.Field)((type) => String),
+    __metadata("design:type", String)
+], FoodBoard.prototype, "userName", void 0);
 FoodBoard = __decorate([
     (0, graphql_1.InputType)('FoodBoardInputType', { isAbstract: true }),
     (0, graphql_1.ObjectType)(),

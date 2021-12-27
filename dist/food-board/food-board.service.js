@@ -31,6 +31,7 @@ let FoodBoardService = class FoodBoardService {
                 imgUrl,
                 title,
                 user: user['user'],
+                userName: user['user'].name,
             });
             await this.foodBoard.save(newReview);
             return { ok: true };
