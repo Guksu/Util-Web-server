@@ -28,7 +28,7 @@ export class FoodBoardService {
         date,
         title,
         user: user['user'],
-        userName: user['user'].name,
+        userName: user['user'].id,
       });
 
       await this.foodBoard.save(newReview);
@@ -41,17 +41,13 @@ export class FoodBoardService {
 
   async editReview({
     FoodBoardNo,
-    category,
     content,
     date,
-    title,
   }: EditReviewInput): Promise<EditReviewOutput> {
     try {
       const checkReview = await this.foodBoard.findOne({ FoodBoardNo });
-      if (category) checkReview.category = category;
       if (content) checkReview.content = content;
       if (date) checkReview.date = date;
-      if (title) checkReview.title = title;
 
       await this.foodBoard.save(checkReview);
       return { ok: true };

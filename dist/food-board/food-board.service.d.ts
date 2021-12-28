@@ -11,7 +11,7 @@ export declare class FoodBoardService {
     private readonly foodBoard;
     constructor(foodBoard: Repository<FoodBoard>);
     createReview(user: User, { category, content, date, title }: CreateReviewInput): Promise<CreateReviewOutput>;
-    editReview({ FoodBoardNo, category, content, date, title, }: EditReviewInput): Promise<EditReviewOutput>;
+    editReview({ FoodBoardNo, content, date, }: EditReviewInput): Promise<EditReviewOutput>;
     deleteReview(user: User, { FoodBoardNo }: DeleteReviewInput): Promise<DeleteReviewOutput>;
     getFoodReviewList(): Promise<GetFoodReviewListOutput>;
     viewUpdate({ FoodBoardNo, }: ViewUpadateInput): Promise<ViewUpdateOutput>;
