@@ -26,11 +26,6 @@ export class FoodBoard {
   @IsString()
   content: string;
 
-  @Column({ nullable: true })
-  @Field((type) => String, { nullable: true })
-  @IsString()
-  imgUrl?: string;
-
   @Column({ type: 'date' })
   @Field((type) => String)
   @IsString()

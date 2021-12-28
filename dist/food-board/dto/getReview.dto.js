@@ -5,26 +5,28 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateReviewOutput = exports.CreateReviewInput = void 0;
+exports.GetReviewOutput = exports.GetReviewInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const output_dto_1 = require("../../common/dto/output.dto");
 const food_board_entity_1 = require("../entitiy/food-board.entity");
-let CreateReviewInput = class CreateReviewInput extends (0, graphql_1.PickType)(food_board_entity_1.FoodBoard, [
-    'category',
-    'content',
-    'date',
-    'title',
-]) {
+let GetReviewInput = class GetReviewInput extends (0, graphql_1.PickType)(food_board_entity_1.FoodBoard, ['FoodBoardNo']) {
 };
-CreateReviewInput = __decorate([
+GetReviewInput = __decorate([
     (0, graphql_1.InputType)()
-], CreateReviewInput);
-exports.CreateReviewInput = CreateReviewInput;
-let CreateReviewOutput = class CreateReviewOutput extends output_dto_1.CommonOutput {
+], GetReviewInput);
+exports.GetReviewInput = GetReviewInput;
+let GetReviewOutput = class GetReviewOutput extends output_dto_1.CommonOutput {
 };
-CreateReviewOutput = __decorate([
+__decorate([
+    (0, graphql_1.Field)((type) => food_board_entity_1.FoodBoard, { nullable: true }),
+    __metadata("design:type", food_board_entity_1.FoodBoard)
+], GetReviewOutput.prototype, "review", void 0);
+GetReviewOutput = __decorate([
     (0, graphql_1.ObjectType)()
-], CreateReviewOutput);
-exports.CreateReviewOutput = CreateReviewOutput;
-//# sourceMappingURL=createReview.dto.js.map
+], GetReviewOutput);
+exports.GetReviewOutput = GetReviewOutput;
+//# sourceMappingURL=getReview.dto.js.map

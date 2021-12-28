@@ -40,12 +40,6 @@ __decorate([
     __metadata("design:type", String)
 ], FoodBoard.prototype, "content", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    (0, graphql_1.Field)((type) => String, { nullable: true }),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], FoodBoard.prototype, "imgUrl", void 0);
-__decorate([
     (0, typeorm_1.Column)({ type: 'date' }),
     (0, graphql_1.Field)((type) => String),
     (0, class_validator_1.IsString)(),

@@ -22,6 +22,8 @@ const createReview_dto_1 = require("./dto/createReview.dto");
 const deleteReview_dto_1 = require("./dto/deleteReview.dto");
 const editReview_dto_1 = require("./dto/editReview.dto");
 const getFoodReviewList_dto_1 = require("./dto/getFoodReviewList.dto");
+const getReview_dto_1 = require("./dto/getReview.dto");
+const viewUpdate_dto_1 = require("./dto/viewUpdate.dto");
 const food_board_service_1 = require("./food-board.service");
 let FoodBoardResolver = class FoodBoardResolver {
     constructor(foodBoardService) {
@@ -38,6 +40,12 @@ let FoodBoardResolver = class FoodBoardResolver {
     }
     getFoodReviewList() {
         return this.foodBoardService.getFoodReviewList();
+    }
+    viewUpdate(viewUpdateInput) {
+        return this.foodBoardService.viewUpdate(viewUpdateInput);
+    }
+    getReview(getReviewInput) {
+        return this.foodBoardService.getReview(getReviewInput);
     }
 };
 __decorate([
@@ -76,6 +84,22 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], FoodBoardResolver.prototype, "getFoodReviewList", null);
+__decorate([
+    (0, graphql_1.Mutation)((type) => viewUpdate_dto_1.ViewUpdateOutput),
+    (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
+    __param(0, (0, graphql_1.Args)('input')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [viewUpdate_dto_1.ViewUpadateInput]),
+    __metadata("design:returntype", Promise)
+], FoodBoardResolver.prototype, "viewUpdate", null);
+__decorate([
+    (0, graphql_1.Query)((type) => getReview_dto_1.GetReviewOutput),
+    (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
+    __param(0, (0, graphql_1.Args)('input')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [getReview_dto_1.GetReviewInput]),
+    __metadata("design:returntype", Promise)
+], FoodBoardResolver.prototype, "getReview", null);
 FoodBoardResolver = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [food_board_service_1.FoodBoardService])

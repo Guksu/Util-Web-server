@@ -4,7 +4,6 @@ export declare class FoodBoard {
     category: string;
     title: string;
     content: string;
-    imgUrl?: string;
     date: string;
     view: number;
     user: User;

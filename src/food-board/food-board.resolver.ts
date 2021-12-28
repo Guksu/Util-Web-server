@@ -7,6 +7,8 @@ import { CreateReviewInput, CreateReviewOutput } from './dto/createReview.dto';
 import { DeleteReviewInput, DeleteReviewOutput } from './dto/deleteReview.dto';
 import { EditReviewInput, EditReviewOutput } from './dto/editReview.dto';
 import { GetFoodReviewListOutput } from './dto/getFoodReviewList.dto';
+import { GetReviewInput, GetReviewOutput } from './dto/getReview.dto';
+import { ViewUpadateInput, ViewUpdateOutput } from './dto/viewUpdate.dto';
 import { FoodBoardService } from './food-board.service';
 
 @Resolver()
@@ -44,5 +46,21 @@ export class FoodBoardResolver {
   @UseGuards(GqlAuthGuard)
   getFoodReviewList(): Promise<GetFoodReviewListOutput> {
     return this.foodBoardService.getFoodReviewList();
+  }
+
+  @Mutation((type) => ViewUpdateOutput)
+  @UseGuards(GqlAuthGuard)
+  viewUpdate(
+    @Args('input') viewUpdateInput: ViewUpadateInput,
+  ): Promise<ViewUpdateOutput> {
+    return this.foodBoardService.viewUpdate(viewUpdateInput);
+  }
+
+  @Query((type) => GetReviewOutput)
+  @UseGuards(GqlAuthGuard)
+  getReview(
+    @Args('input') getReviewInput: GetReviewInput,
+  ): Promise<GetReviewOutput> {
+    return this.foodBoardService.getReview(getReviewInput);
   }
 }

@@ -3,12 +3,7 @@ import { CommonOutput } from 'src/common/dto/output.dto';
 import { FoodBoard } from '../entitiy/food-board.entity';
 
 @InputType()
-export class CreateReviewInput extends PickType(FoodBoard, [
-  'category',
-  'content',
-  'date',
-  'title',
-]) {}
+export class ViewUpadateInput extends PickType(FoodBoard, ['FoodBoardNo']) {}
 
 @ObjectType()
-export class CreateReviewOutput extends CommonOutput {}
+export class ViewUpdateOutput extends CommonOutput {}

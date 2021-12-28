@@ -22,13 +22,12 @@ let FoodBoardService = class FoodBoardService {
     constructor(foodBoard) {
         this.foodBoard = foodBoard;
     }
-    async createReview(user, { category, content, date, imgUrl, title }) {
+    async createReview(user, { category, content, date, title }) {
         try {
             const newReview = await this.foodBoard.create({
                 category,
                 content,
                 date,
-                imgUrl,
                 title,
                 user: user['user'],
                 userName: user['user'].name,
@@ -40,7 +39,7 @@ let FoodBoardService = class FoodBoardService {
             return { ok: false, error: error };
         }
     }
-    async editReview({ FoodBoardNo, category, content, date, imgUrl, title, }) {
+    async editReview({ FoodBoardNo, category, content, date, title, }) {
         try {
             const checkReview = await this.foodBoard.findOne({ FoodBoardNo });
             if (category)
@@ -49,8 +48,6 @@ let FoodBoardService = class FoodBoardService {
                 checkReview.content = content;
             if (date)
                 checkReview.date = date;
-            if (imgUrl)
-                checkReview.imgUrl = imgUrl;
             if (title)
                 checkReview.title = title;
             await this.foodBoard.save(checkReview);
@@ -79,6 +76,26 @@ let FoodBoardService = class FoodBoardService {
         try {
             const getReviwList = await this.foodBoard.find();
             return { ok: true, review: getReviwList };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
+    async viewUpdate({ FoodBoardNo, }) {
+        try {
+            const checkList = await this.foodBoard.findOne({ FoodBoardNo });
+            checkList.view += 1;
+            await this.foodBoard.save(checkList);
+            return { ok: true };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
+    async getReview({ FoodBoardNo }) {
+        try {
+            const checkReview = await this.foodBoard.findOne({ FoodBoardNo });
+            return { ok: true, review: checkReview };
         }
         catch (error) {
             return { ok: false, error: error };

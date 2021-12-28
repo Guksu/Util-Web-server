@@ -6,6 +6,8 @@ import { CreateReviewInput, CreateReviewOutput } from './dto/createReview.dto';
 import { DeleteReviewInput, DeleteReviewOutput } from './dto/deleteReview.dto';
 import { EditReviewInput, EditReviewOutput } from './dto/editReview.dto';
 import { GetFoodReviewListOutput } from './dto/getFoodReviewList.dto';
+import { GetReviewInput, GetReviewOutput } from './dto/getReview.dto';
+import { ViewUpadateInput, ViewUpdateOutput } from './dto/viewUpdate.dto';
 import { FoodBoard } from './entitiy/food-board.entity';
 
 @Injectable()
@@ -17,14 +19,13 @@ export class FoodBoardService {
 
   async createReview(
     user: User,
-    { category, content, date, imgUrl, title }: CreateReviewInput,
+    { category, content, date, title }: CreateReviewInput,
   ): Promise<CreateReviewOutput> {
     try {
       const newReview = await this.foodBoard.create({
         category,
         content,
         date,
-        imgUrl,
         title,
         user: user['user'],
         userName: user['user'].name,
@@ -43,7 +44,6 @@ export class FoodBoardService {
     category,
     content,
     date,
-    imgUrl,
     title,
   }: EditReviewInput): Promise<EditReviewOutput> {
     try {
@@ -51,7 +51,6 @@ export class FoodBoardService {
       if (category) checkReview.category = category;
       if (content) checkReview.content = content;
       if (date) checkReview.date = date;
-      if (imgUrl) checkReview.imgUrl = imgUrl;
       if (title) checkReview.title = title;
 
       await this.foodBoard.save(checkReview);
@@ -83,6 +82,29 @@ export class FoodBoardService {
       const getReviwList = await this.foodBoard.find();
 
       return { ok: true, review: getReviwList };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async viewUpdate({
+    FoodBoardNo,
+  }: ViewUpadateInput): Promise<ViewUpdateOutput> {
+    try {
+      const checkList = await this.foodBoard.findOne({ FoodBoardNo });
+      checkList.view += 1;
+      await this.foodBoard.save(checkList);
+      return { ok: true };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async getReview({ FoodBoardNo }: GetReviewInput): Promise<GetReviewOutput> {
+    try {
+      const checkReview = await this.foodBoard.findOne({ FoodBoardNo });
+
+      return { ok: true, review: checkReview };
     } catch (error) {
       return { ok: false, error: error };
     }

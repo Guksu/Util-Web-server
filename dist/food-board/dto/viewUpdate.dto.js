@@ -6,25 +6,20 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateReviewOutput = exports.CreateReviewInput = void 0;
+exports.ViewUpdateOutput = exports.ViewUpadateInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const output_dto_1 = require("../../common/dto/output.dto");
 const food_board_entity_1 = require("../entitiy/food-board.entity");
-let CreateReviewInput = class CreateReviewInput extends (0, graphql_1.PickType)(food_board_entity_1.FoodBoard, [
-    'category',
-    'content',
-    'date',
-    'title',
-]) {
+let ViewUpadateInput = class ViewUpadateInput extends (0, graphql_1.PickType)(food_board_entity_1.FoodBoard, ['FoodBoardNo']) {
 };
-CreateReviewInput = __decorate([
+ViewUpadateInput = __decorate([
     (0, graphql_1.InputType)()
-], CreateReviewInput);
-exports.CreateReviewInput = CreateReviewInput;
-let CreateReviewOutput = class CreateReviewOutput extends output_dto_1.CommonOutput {
+], ViewUpadateInput);
+exports.ViewUpadateInput = ViewUpadateInput;
+let ViewUpdateOutput = class ViewUpdateOutput extends output_dto_1.CommonOutput {
 };
-CreateReviewOutput = __decorate([
+ViewUpdateOutput = __decorate([
     (0, graphql_1.ObjectType)()
-], CreateReviewOutput);
-exports.CreateReviewOutput = CreateReviewOutput;
-//# sourceMappingURL=createReview.dto.js.map
+], ViewUpdateOutput);
+exports.ViewUpdateOutput = ViewUpdateOutput;
+//# sourceMappingURL=viewUpdate.dto.js.map
