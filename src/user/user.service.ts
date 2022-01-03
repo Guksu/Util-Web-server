@@ -13,6 +13,7 @@ import { LoginInput, LoginOutput } from './dto/login.dto';
 import { ProfileInfoOutput } from './dto/profileInfo.dto';
 import { User } from './entitiy/user.entity';
 import * as bcrypt from 'bcrypt';
+import { Fassion } from 'src/fassion/entitiy/fassion.entity';
 
 @Injectable()
 export class UserService {
@@ -20,6 +21,7 @@ export class UserService {
     @InjectRepository(User)
     private readonly user: Repository<User>,
     private readonly jwtService: JwtService,
+    @InjectRepository(Fassion) private readonly fassion: Repository<Fassion>,
   ) {}
 
   async createUser({
@@ -104,12 +106,17 @@ export class UserService {
   ): Promise<ChangeUserImgOutput> {
     try {
       const findUser = await this.user.find(user['user']);
+      const fassionImg = await this.fassion.find({ user: user['user'] });
       if (!findUser)
         return {
           ok: false,
           error: '로그인 오류 혹은 계정이 없습니다',
         };
       findUser[0].userImgUrl = userImgUrl;
+      for (let i = 0; i < fassionImg.length; i++) {
+        fassionImg[i].userImg = userImgUrl;
+        await this.fassion.save(fassionImg[i]);
+      }
       await this.user.save(findUser[0]);
       return { ok: true };
     } catch (error) {

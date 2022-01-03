@@ -7,10 +7,12 @@ import { DeleteUserInput, DeleteUserOutput } from './dto/deleteUser.dto';
 import { LoginInput, LoginOutput } from './dto/login.dto';
 import { ProfileInfoOutput } from './dto/profileInfo.dto';
 import { User } from './entitiy/user.entity';
+import { Fassion } from 'src/fassion/entitiy/fassion.entity';
 export declare class UserService {
     private readonly user;
     private readonly jwtService;
-    constructor(user: Repository<User>, jwtService: JwtService);
+    private readonly fassion;
+    constructor(user: Repository<User>, jwtService: JwtService, fassion: Repository<Fassion>);
     createUser({ id, name, password, }: CreateUserInput): Promise<CreateUserOutput>;
     login({ id, password }: LoginInput): Promise<LoginOutput>;
     profileInfo(user: User): Promise<ProfileInfoOutput>;

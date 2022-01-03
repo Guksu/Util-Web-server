@@ -43,6 +43,16 @@ __decorate([
     (0, graphql_1.Field)((type) => user_entity_1.User),
     __metadata("design:type", user_entity_1.User)
 ], Fassion.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    (0, graphql_1.Field)((type) => String),
+    __metadata("design:type", String)
+], Fassion.prototype, "userImg", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ default: 0 }),
+    (0, graphql_1.Field)((type) => Number, { defaultValue: 0 }),
+    __metadata("design:type", Number)
+], Fassion.prototype, "like", void 0);
 Fassion = __decorate([
     (0, graphql_1.InputType)('FassionInputType', { isAbstract: true }),
     (0, graphql_1.ObjectType)(),

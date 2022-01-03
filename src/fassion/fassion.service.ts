@@ -11,6 +11,7 @@ import {
   DeleteFassionOutput,
 } from './dto/deleteFassion.dto';
 import { GetMyFassionListOutput } from './dto/getMyFassionList.dto';
+import { LikeUpdateInput, LikeUpdateOutput } from './dto/likeUpdate.dto';
 import { Fassion } from './entitiy/fassion.entity';
 
 @Injectable()
@@ -29,6 +30,7 @@ export class FassionService {
         imgUrl,
         secret,
         user: user['user'],
+        userImg: user['user'].userImgUrl,
       });
 
       await this.fassion.save(newFassion);
@@ -56,6 +58,7 @@ export class FassionService {
   async getMyFassionList(user: User): Promise<GetMyFassionListOutput> {
     try {
       const getFassion = await this.fassion.find({ user: user['user'] });
+
       return { ok: true, fassion: getFassion };
     } catch (error) {
       return { ok: false, error: error };
@@ -67,6 +70,28 @@ export class FassionService {
       const getFassion = await this.fassion.find({ secret: 'yes' });
 
       return { ok: true, fassion: getFassion };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async likeUpdate({ fassionNo }: LikeUpdateInput): Promise<LikeUpdateOutput> {
+    try {
+      const getFassion = await this.fassion.findOne({ fassionNo });
+      getFassion.like += 1;
+      await this.fassion.save(getFassion);
+      return { ok: true };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async removeLike({ fassionNo }: LikeUpdateInput): Promise<LikeUpdateOutput> {
+    try {
+      const getFassion = await this.fassion.findOne({ fassionNo });
+      getFassion.like -= 1;
+      await this.fassion.save(getFassion);
+      return { ok: true };
     } catch (error) {
       return { ok: false, error: error };
     }

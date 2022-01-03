@@ -13,6 +13,7 @@ import {
 } from './dto/deleteFassion.dto';
 import { GetAllFassionListOutput } from './dto/getAllFassionList.dto';
 import { GetMyFassionListOutput } from './dto/getMyFassionList.dto';
+import { LikeUpdateInput, LikeUpdateOutput } from './dto/likeUpdate.dto';
 import { FassionService } from './fassion.service';
 
 @Resolver()
@@ -48,5 +49,21 @@ export class FassionResolver {
   @UseGuards(GqlAuthGuard)
   getAllFassionList(): Promise<GetAllFassionListOutput> {
     return this.fassionService.getAllFassionList();
+  }
+
+  @Mutation((type) => LikeUpdateOutput)
+  @UseGuards(GqlAuthGuard)
+  likeUpdate(
+    @Args('input') likeUpdateInput: LikeUpdateInput,
+  ): Promise<LikeUpdateOutput> {
+    return this.fassionService.likeUpdate(likeUpdateInput);
+  }
+
+  @Mutation((type) => LikeUpdateOutput)
+  @UseGuards(GqlAuthGuard)
+  removeLike(
+    @Args('input') likeUpdateInput: LikeUpdateInput,
+  ): Promise<LikeUpdateOutput> {
+    return this.fassionService.removeLike(likeUpdateInput);
   }
 }

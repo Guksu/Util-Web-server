@@ -19,10 +19,12 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./entitiy/user.entity");
 const bcrypt = require("bcrypt");
+const fassion_entity_1 = require("../fassion/entitiy/fassion.entity");
 let UserService = class UserService {
-    constructor(user, jwtService) {
+    constructor(user, jwtService, fassion) {
         this.user = user;
         this.jwtService = jwtService;
+        this.fassion = fassion;
     }
     async createUser({ id, name, password, }) {
         try {
@@ -92,12 +94,17 @@ let UserService = class UserService {
     async changeUserImg(user, { userImgUrl }) {
         try {
             const findUser = await this.user.find(user['user']);
+            const fassionImg = await this.fassion.find({ user: user['user'] });
             if (!findUser)
                 return {
                     ok: false,
                     error: '로그인 오류 혹은 계정이 없습니다',
                 };
             findUser[0].userImgUrl = userImgUrl;
+            for (let i = 0; i < fassionImg.length; i++) {
+                fassionImg[i].userImg = userImgUrl;
+                await this.fassion.save(fassionImg[i]);
+            }
             await this.user.save(findUser[0]);
             return { ok: true };
         }
@@ -127,8 +134,10 @@ let UserService = class UserService {
 UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __param(2, (0, typeorm_1.InjectRepository)(fassion_entity_1.Fassion)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
-        jwt_1.JwtService])
+        jwt_1.JwtService,
+        typeorm_2.Repository])
 ], UserService);
 exports.UserService = UserService;
 //# sourceMappingURL=user.service.js.map

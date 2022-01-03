@@ -22,7 +22,7 @@ export class UploadsController {
       },
     });
     try {
-      const objectName = `${Date.now() + file.originalname}`;
+      const objectName = `${decodeURI(Date.now() + file.originalname)}`;
       await new AWS.S3()
         .putObject({
           Body: file.buffer,

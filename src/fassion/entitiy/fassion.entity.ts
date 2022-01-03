@@ -28,4 +28,12 @@ export class Fassion {
   @ManyToOne((type) => User, (User) => User.fassion, { cascade: true })
   @Field((type) => User)
   user: User;
+
+  @Column()
+  @Field((type) => String)
+  userImg: string;
+
+  @Column({ default: 0 })
+  @Field((type) => Number, { defaultValue: 0 })
+  like: number;
 }

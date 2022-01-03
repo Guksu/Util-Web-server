@@ -29,6 +29,7 @@ let FassionService = class FassionService {
                 imgUrl,
                 secret,
                 user: user['user'],
+                userImg: user['user'].userImgUrl,
             });
             await this.fassion.save(newFassion);
             return { ok: true };
@@ -60,6 +61,28 @@ let FassionService = class FassionService {
         try {
             const getFassion = await this.fassion.find({ secret: 'yes' });
             return { ok: true, fassion: getFassion };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
+    async likeUpdate({ fassionNo }) {
+        try {
+            const getFassion = await this.fassion.findOne({ fassionNo });
+            getFassion.like += 1;
+            await this.fassion.save(getFassion);
+            return { ok: true };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
+    async removeLike({ fassionNo }) {
+        try {
+            const getFassion = await this.fassion.findOne({ fassionNo });
+            getFassion.like -= 1;
+            await this.fassion.save(getFassion);
+            return { ok: true };
         }
         catch (error) {
             return { ok: false, error: error };

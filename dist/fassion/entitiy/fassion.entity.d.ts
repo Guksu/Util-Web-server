@@ -5,4 +5,6 @@ export declare class Fassion {
     imgUrl: string;
     secret: string;
     user: User;
+    userImg: string;
+    like: number;
 }
