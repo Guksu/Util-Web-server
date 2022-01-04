@@ -14,6 +14,6 @@ export declare class FassionResolver {
     getMyFassionList(user: User): Promise<GetMyFassionListOutput>;
     getAllFassionList(): Promise<GetAllFassionListOutput>;
     likeUpdate(user: User, likeUpdateInput: LikeUpdateInput): Promise<LikeUpdateOutput>;
-    removeLike(user: User, likeUpdateInput: LikeUpdateInput): Promise<LikeUpdateOutput>;
+    likeRemove(user: User, likeUpdateInput: LikeUpdateInput): Promise<LikeUpdateOutput>;
     likeCheck(user: User): Promise<LikeCheckOutput>;
 }

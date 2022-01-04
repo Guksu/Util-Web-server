@@ -97,7 +97,7 @@ export class FassionService {
     }
   }
 
-  async removeLike(
+  async likeRemove(
     user: User,
     { fassionNo }: LikeUpdateInput,
   ): Promise<LikeUpdateOutput> {
@@ -107,8 +107,9 @@ export class FassionService {
         fassionNo,
         userNo: user['user'].userNo,
       });
-
-      getFassion.like -= 1;
+      {
+        getFassion.like === 0 ? (getFassion.like = 0) : (getFassion.like -= 1);
+      }
       await this.fassion.save(getFassion);
       await this.likeRP.delete(getLike);
       return { ok: true };

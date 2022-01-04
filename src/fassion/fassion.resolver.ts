@@ -63,11 +63,11 @@ export class FassionResolver {
 
   @Mutation((type) => LikeUpdateOutput)
   @UseGuards(GqlAuthGuard)
-  removeLike(
+  likeRemove(
     @GetUser() user: User,
     @Args('input') likeUpdateInput: LikeUpdateInput,
   ): Promise<LikeUpdateOutput> {
-    return this.fassionService.removeLike(user, likeUpdateInput);
+    return this.fassionService.likeRemove(user, likeUpdateInput);
   }
 
   @Query((type) => LikeCheckOutput)

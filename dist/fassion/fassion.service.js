@@ -84,14 +84,16 @@ let FassionService = class FassionService {
             return { ok: false, error: error };
         }
     }
-    async removeLike(user, { fassionNo }) {
+    async likeRemove(user, { fassionNo }) {
         try {
             const getFassion = await this.fassion.findOne({ fassionNo });
             const getLike = await this.likeRP.findOne({
                 fassionNo,
                 userNo: user['user'].userNo,
             });
-            getFassion.like -= 1;
+            {
+                getFassion.like === 0 ? (getFassion.like = 0) : (getFassion.like -= 1);
+            }
             await this.fassion.save(getFassion);
             await this.likeRP.delete(getLike);
             return { ok: true };

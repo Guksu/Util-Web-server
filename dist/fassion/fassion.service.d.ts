@@ -16,6 +16,6 @@ export declare class FassionService {
     getMyFassionList(user: User): Promise<GetMyFassionListOutput>;
     getAllFassionList(): Promise<GetMyFassionListOutput>;
     likeUpdate(user: User, { fassionNo }: LikeUpdateInput): Promise<LikeUpdateOutput>;
-    removeLike(user: User, { fassionNo }: LikeUpdateInput): Promise<LikeUpdateOutput>;
+    likeRemove(user: User, { fassionNo }: LikeUpdateInput): Promise<LikeUpdateOutput>;
     likeCheck(user: User): Promise<LikeCheckOutput>;
 }

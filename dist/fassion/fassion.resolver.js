@@ -44,8 +44,8 @@ let FassionResolver = class FassionResolver {
     likeUpdate(user, likeUpdateInput) {
         return this.fassionService.likeUpdate(user, likeUpdateInput);
     }
-    removeLike(user, likeUpdateInput) {
-        return this.fassionService.removeLike(user, likeUpdateInput);
+    likeRemove(user, likeUpdateInput) {
+        return this.fassionService.likeRemove(user, likeUpdateInput);
     }
     likeCheck(user) {
         return this.fassionService.likeCheck(user);
@@ -104,7 +104,7 @@ __decorate([
     __metadata("design:paramtypes", [user_entity_1.User,
         likeUpdate_dto_1.LikeUpdateInput]),
     __metadata("design:returntype", Promise)
-], FassionResolver.prototype, "removeLike", null);
+], FassionResolver.prototype, "likeRemove", null);
 __decorate([
     (0, graphql_1.Query)((type) => likeCheck_dto_1.LikeCheckOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
