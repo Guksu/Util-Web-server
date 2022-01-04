@@ -18,9 +18,11 @@ const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../user/entitiy/user.entity");
 const typeorm_2 = require("typeorm");
 const fassion_entity_1 = require("./entitiy/fassion.entity");
+const like_entity_1 = require("./entitiy/like.entity");
 let FassionService = class FassionService {
-    constructor(fassion) {
+    constructor(fassion, likeRP) {
         this.fassion = fassion;
+        this.likeRP = likeRP;
     }
     async createFassion(user, { date, imgUrl, secret }) {
         try {
@@ -51,7 +53,7 @@ let FassionService = class FassionService {
     async getMyFassionList(user) {
         try {
             const getFassion = await this.fassion.find({ user: user['user'] });
-            return { ok: true, fassion: getFassion };
+            return { ok: true, fassion: getFassion.reverse() };
         }
         catch (error) {
             return { ok: false, error: error };
@@ -60,16 +62,21 @@ let FassionService = class FassionService {
     async getAllFassionList() {
         try {
             const getFassion = await this.fassion.find({ secret: 'yes' });
-            return { ok: true, fassion: getFassion };
+            return { ok: true, fassion: getFassion.reverse() };
         }
         catch (error) {
             return { ok: false, error: error };
         }
     }
-    async likeUpdate({ fassionNo }) {
+    async likeUpdate(user, { fassionNo }) {
         try {
             const getFassion = await this.fassion.findOne({ fassionNo });
             getFassion.like += 1;
+            const like = await this.likeRP.create({
+                fassionNo,
+                userNo: user['user'].userNo,
+            });
+            await this.likeRP.save(like);
             await this.fassion.save(getFassion);
             return { ok: true };
         }
@@ -77,12 +84,30 @@ let FassionService = class FassionService {
             return { ok: false, error: error };
         }
     }
-    async removeLike({ fassionNo }) {
+    async removeLike(user, { fassionNo }) {
         try {
             const getFassion = await this.fassion.findOne({ fassionNo });
+            const getLike = await this.likeRP.findOne({
+                fassionNo,
+                userNo: user['user'].userNo,
+            });
             getFassion.like -= 1;
             await this.fassion.save(getFassion);
+            await this.likeRP.delete(getLike);
             return { ok: true };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
+    async likeCheck(user) {
+        try {
+            const likeList = await this.likeRP.find({ userNo: user['user'].userNo });
+            let listArray = [];
+            for (let i = 0; i < likeList.length; i++) {
+                listArray.push(likeList[i].fassionNo);
+            }
+            return { ok: true, like: listArray };
         }
         catch (error) {
             return { ok: false, error: error };
@@ -92,7 +117,9 @@ let FassionService = class FassionService {
 FassionService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(fassion_entity_1.Fassion)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(like_entity_1.Like)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], FassionService);
 exports.FassionService = FassionService;
 //# sourceMappingURL=fassion.service.js.map

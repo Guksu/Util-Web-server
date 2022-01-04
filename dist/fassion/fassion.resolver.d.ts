@@ -3,6 +3,7 @@ import { CreateFassionInput, CreateFassionOutput } from './dto/createFassion.dto
 import { DeleteFassionInput, DeleteFassionOutput } from './dto/deleteFassion.dto';
 import { GetAllFassionListOutput } from './dto/getAllFassionList.dto';
 import { GetMyFassionListOutput } from './dto/getMyFassionList.dto';
+import { LikeCheckOutput } from './dto/likeCheck.dto';
 import { LikeUpdateInput, LikeUpdateOutput } from './dto/likeUpdate.dto';
 import { FassionService } from './fassion.service';
 export declare class FassionResolver {
@@ -12,6 +13,7 @@ export declare class FassionResolver {
     deleteFassion(deleteFassionInput: DeleteFassionInput): Promise<DeleteFassionOutput>;
     getMyFassionList(user: User): Promise<GetMyFassionListOutput>;
     getAllFassionList(): Promise<GetAllFassionListOutput>;
-    likeUpdate(likeUpdateInput: LikeUpdateInput): Promise<LikeUpdateOutput>;
-    removeLike(likeUpdateInput: LikeUpdateInput): Promise<LikeUpdateOutput>;
+    likeUpdate(user: User, likeUpdateInput: LikeUpdateInput): Promise<LikeUpdateOutput>;
+    removeLike(user: User, likeUpdateInput: LikeUpdateInput): Promise<LikeUpdateOutput>;
+    likeCheck(user: User): Promise<LikeCheckOutput>;
 }

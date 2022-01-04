@@ -12,6 +12,7 @@ import { Fassion } from './fassion/entitiy/fassion.entity';
 import { FoodBoardModule } from './food-board/food-board.module';
 import { FoodBoard } from './food-board/entitiy/food-board.entity';
 import { UploadsModule } from './uploads/uploads.module';
+import { Like } from './fassion/entitiy/like.entity';
 require('dotenv').config();
 
 @Module({
@@ -23,7 +24,7 @@ require('dotenv').config();
       username: 'root',
       password: process.env.PASSWORD,
       database: 'util-web',
-      entities: [User, Account, Fassion, FoodBoard],
+      entities: [User, Account, Fassion, FoodBoard, Like],
       synchronize: true,
     }),
     GraphQLModule.forRoot({

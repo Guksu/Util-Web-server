@@ -21,6 +21,7 @@ const fassion_entity_1 = require("./fassion/entitiy/fassion.entity");
 const food_board_module_1 = require("./food-board/food-board.module");
 const food_board_entity_1 = require("./food-board/entitiy/food-board.entity");
 const uploads_module_1 = require("./uploads/uploads.module");
+const like_entity_1 = require("./fassion/entitiy/like.entity");
 require('dotenv').config();
 let AppModule = class AppModule {
 };
@@ -34,7 +35,7 @@ AppModule = __decorate([
                 username: 'root',
                 password: process.env.PASSWORD,
                 database: 'util-web',
-                entities: [user_entity_1.User, account_entity_1.Account, fassion_entity_1.Fassion, food_board_entity_1.FoodBoard],
+                entities: [user_entity_1.User, account_entity_1.Account, fassion_entity_1.Fassion, food_board_entity_1.FoodBoard, like_entity_1.Like],
                 synchronize: true,
             }),
             graphql_1.GraphQLModule.forRoot({

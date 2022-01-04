@@ -22,6 +22,7 @@ const createFassion_dto_1 = require("./dto/createFassion.dto");
 const deleteFassion_dto_1 = require("./dto/deleteFassion.dto");
 const getAllFassionList_dto_1 = require("./dto/getAllFassionList.dto");
 const getMyFassionList_dto_1 = require("./dto/getMyFassionList.dto");
+const likeCheck_dto_1 = require("./dto/likeCheck.dto");
 const likeUpdate_dto_1 = require("./dto/likeUpdate.dto");
 const fassion_service_1 = require("./fassion.service");
 let FassionResolver = class FassionResolver {
@@ -40,11 +41,14 @@ let FassionResolver = class FassionResolver {
     getAllFassionList() {
         return this.fassionService.getAllFassionList();
     }
-    likeUpdate(likeUpdateInput) {
-        return this.fassionService.likeUpdate(likeUpdateInput);
+    likeUpdate(user, likeUpdateInput) {
+        return this.fassionService.likeUpdate(user, likeUpdateInput);
     }
-    removeLike(likeUpdateInput) {
-        return this.fassionService.removeLike(likeUpdateInput);
+    removeLike(user, likeUpdateInput) {
+        return this.fassionService.removeLike(user, likeUpdateInput);
+    }
+    likeCheck(user) {
+        return this.fassionService.likeCheck(user);
     }
 };
 __decorate([
@@ -84,19 +88,31 @@ __decorate([
 __decorate([
     (0, graphql_1.Mutation)((type) => likeUpdate_dto_1.LikeUpdateOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
-    __param(0, (0, graphql_1.Args)('input')),
+    __param(0, (0, auth_user_decorator_1.GetUser)()),
+    __param(1, (0, graphql_1.Args)('input')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [likeUpdate_dto_1.LikeUpdateInput]),
+    __metadata("design:paramtypes", [user_entity_1.User,
+        likeUpdate_dto_1.LikeUpdateInput]),
     __metadata("design:returntype", Promise)
 ], FassionResolver.prototype, "likeUpdate", null);
 __decorate([
     (0, graphql_1.Mutation)((type) => likeUpdate_dto_1.LikeUpdateOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
-    __param(0, (0, graphql_1.Args)('input')),
+    __param(0, (0, auth_user_decorator_1.GetUser)()),
+    __param(1, (0, graphql_1.Args)('input')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [likeUpdate_dto_1.LikeUpdateInput]),
+    __metadata("design:paramtypes", [user_entity_1.User,
+        likeUpdate_dto_1.LikeUpdateInput]),
     __metadata("design:returntype", Promise)
 ], FassionResolver.prototype, "removeLike", null);
+__decorate([
+    (0, graphql_1.Query)((type) => likeCheck_dto_1.LikeCheckOutput),
+    (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
+    __param(0, (0, auth_user_decorator_1.GetUser)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.User]),
+    __metadata("design:returntype", Promise)
+], FassionResolver.prototype, "likeCheck", null);
 FassionResolver = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [fassion_service_1.FassionService])

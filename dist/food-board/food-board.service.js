@@ -71,7 +71,7 @@ let FoodBoardService = class FoodBoardService {
     async getFoodReviewList() {
         try {
             const getReviwList = await this.foodBoard.find();
-            return { ok: true, review: getReviwList };
+            return { ok: true, review: getReviwList.reverse() };
         }
         catch (error) {
             return { ok: false, error: error };
