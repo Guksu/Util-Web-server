@@ -21,7 +21,7 @@ export class FoodBoard {
   @IsString()
   title: string;
 
-  @Column()
+  @Column({ length: 4000 })
   @Field((type) => String)
   @IsString()
   content: string;
@@ -34,6 +34,10 @@ export class FoodBoard {
   @Column({ default: 0 })
   @Field((type) => Number)
   view: number;
+
+  @Column()
+  @Field((type) => String)
+  userImg: string;
 
   @ManyToOne((type) => User, (User) => User.foodBoard, { cascade: true })
   @Field((type) => User)

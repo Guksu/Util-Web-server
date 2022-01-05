@@ -6,6 +6,7 @@ export declare class FoodBoard {
     content: string;
     date: string;
     view: number;
+    userImg: string;
     user: User;
     userName: string;
 }

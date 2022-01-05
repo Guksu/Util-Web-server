@@ -34,7 +34,7 @@ __decorate([
     __metadata("design:type", String)
 ], FoodBoard.prototype, "title", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, typeorm_1.Column)({ length: 4000 }),
     (0, graphql_1.Field)((type) => String),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -50,6 +50,11 @@ __decorate([
     (0, graphql_1.Field)((type) => Number),
     __metadata("design:type", Number)
 ], FoodBoard.prototype, "view", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    (0, graphql_1.Field)((type) => String),
+    __metadata("design:type", String)
+], FoodBoard.prototype, "userImg", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)((type) => user_entity_1.User, (User) => User.foodBoard, { cascade: true }),
     (0, graphql_1.Field)((type) => user_entity_1.User),
