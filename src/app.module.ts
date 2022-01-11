@@ -13,6 +13,7 @@ import { FoodBoardModule } from './food-board/food-board.module';
 import { FoodBoard } from './food-board/entitiy/food-board.entity';
 import { UploadsModule } from './uploads/uploads.module';
 import { Like } from './fassion/entitiy/like.entity';
+import { ChatGateway } from './chat.gateway';
 require('dotenv').config();
 
 @Module({
@@ -47,6 +48,6 @@ require('dotenv').config();
     UploadsModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [ChatGateway],
 })
 export class AppModule {}
