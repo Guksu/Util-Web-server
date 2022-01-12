@@ -22,6 +22,7 @@ const food_board_module_1 = require("./food-board/food-board.module");
 const food_board_entity_1 = require("./food-board/entitiy/food-board.entity");
 const uploads_module_1 = require("./uploads/uploads.module");
 const like_entity_1 = require("./fassion/entitiy/like.entity");
+const chat_gateway_1 = require("./chat.gateway");
 require('dotenv').config();
 let AppModule = class AppModule {
 };
@@ -59,7 +60,7 @@ AppModule = __decorate([
             uploads_module_1.UploadsModule,
         ],
         controllers: [],
-        providers: [],
+        providers: [chat_gateway_1.ChatGateway],
     })
 ], AppModule);
 exports.AppModule = AppModule;
