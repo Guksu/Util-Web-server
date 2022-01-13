@@ -8,7 +8,7 @@ import { EditMarketInput, EditMarketOutput } from './dto/editMarket.dto';
 import { GetMarketInput, GetMarketOutput } from './dto/getMarket.dto';
 import { GetMarketListOutput } from './dto/getMarketList.dto';
 import {
-  MarketViewUpadateInput,
+  MarketViewUpdateInput,
   MarketViewUpdateOutput,
 } from './dto/viewUpdate.dto';
 import { FleaMarket } from './entity/flea-market.entity';
@@ -22,7 +22,7 @@ export class FleacMarketService {
 
   async createMarket(
     user: User,
-    { content, date, title, productImg }: CreateMarketInput,
+    { content, date, title, productImg, category }: CreateMarketInput,
   ): Promise<CreateMarketOutput> {
     try {
       const newMarket = await this.fleaMarket.create({
@@ -30,6 +30,7 @@ export class FleacMarketService {
         date,
         title,
         productImg,
+        category,
         user: user['user'],
         userName: user['user'].id,
         userImg: user['user'].userImgUrl,
@@ -43,14 +44,16 @@ export class FleacMarketService {
   }
 
   async edtiMarket({
-    FleaMakretNo,
+    FleaMarketNo,
     content,
     productImg,
+    date,
   }: EditMarketInput): Promise<EditMarketOutput> {
     try {
-      const checkMarket = await this.fleaMarket.findOne({ FleaMakretNo });
+      const checkMarket = await this.fleaMarket.findOne({ FleaMarketNo });
       if (content) checkMarket.content = content;
       if (productImg) checkMarket.productImg = productImg;
+      if (date) checkMarket.date = date;
 
       await this.fleaMarket.save(checkMarket);
       return { ok: true };
@@ -61,12 +64,12 @@ export class FleacMarketService {
 
   async deleteMarket(
     user: User,
-    { FleaMakretNo }: DeleteMarketInput,
+    { FleaMarketNo }: DeleteMarketInput,
   ): Promise<DeleteMarketOutput> {
     try {
       const checkReview = await this.fleaMarket.findOne({
         user: user['user'],
-        FleaMakretNo,
+        FleaMarketNo,
       });
       if (!checkReview) return { ok: false, error: '작성글이 없습니다.' };
       await this.fleaMarket.delete(checkReview);
@@ -77,10 +80,10 @@ export class FleacMarketService {
   }
 
   async marketViewUpdate({
-    FleaMakretNo,
-  }: MarketViewUpadateInput): Promise<MarketViewUpdateOutput> {
+    FleaMarketNo,
+  }: MarketViewUpdateInput): Promise<MarketViewUpdateOutput> {
     try {
-      const checkList = await this.fleaMarket.findOne({ FleaMakretNo });
+      const checkList = await this.fleaMarket.findOne({ FleaMarketNo });
       checkList.view += 1;
       await this.fleaMarket.save(checkList);
       return { ok: true };
@@ -99,11 +102,11 @@ export class FleacMarketService {
     }
   }
 
-  async getMarket({ FleaMakretNo }: GetMarketInput): Promise<GetMarketOutput> {
+  async getMarket({ FleaMarketNo }: GetMarketInput): Promise<GetMarketOutput> {
     try {
-      const checkReview = await this.fleaMarket.findOne({ FleaMakretNo });
+      const checkReview = await this.fleaMarket.findOne({ FleaMarketNo });
 
-      return { ok: true, review: checkReview };
+      return { ok: true, market: checkReview };
     } catch (error) {
       return { ok: false, error: error };
     }

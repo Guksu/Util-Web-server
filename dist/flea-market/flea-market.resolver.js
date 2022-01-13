@@ -35,17 +35,17 @@ let FleaMarketResover = class FleaMarketResover {
     editMarket(editMarketInput) {
         return this.fleaMarketService.edtiMarket(editMarketInput);
     }
-    deleteReview(user, deleteMarketInput) {
+    deleteMarket(user, deleteMarketInput) {
         return this.fleaMarketService.deleteMarket(user, deleteMarketInput);
     }
-    viewUpdate(marketViewUpdateInput) {
+    marketViewUpdate(marketViewUpdateInput) {
         return this.fleaMarketService.marketViewUpdate(marketViewUpdateInput);
     }
     getMarketList() {
-        return this.getMarketList();
+        return this.fleaMarketService.getMarketList();
     }
     getMarket(getMarketInput) {
-        return this.getMarket(getMarketInput);
+        return this.fleaMarketService.getMarket(getMarketInput);
     }
 };
 __decorate([
@@ -75,15 +75,15 @@ __decorate([
     __metadata("design:paramtypes", [user_entity_1.User,
         deleteMarket_dto_1.DeleteMarketInput]),
     __metadata("design:returntype", Promise)
-], FleaMarketResover.prototype, "deleteReview", null);
+], FleaMarketResover.prototype, "deleteMarket", null);
 __decorate([
     (0, graphql_1.Mutation)((type) => viewUpdate_dto_1.MarketViewUpdateOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
     __param(0, (0, graphql_1.Args)('input')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [viewUpdate_dto_1.MarketViewUpadateInput]),
+    __metadata("design:paramtypes", [viewUpdate_dto_1.MarketViewUpdateInput]),
     __metadata("design:returntype", Promise)
-], FleaMarketResover.prototype, "viewUpdate", null);
+], FleaMarketResover.prototype, "marketViewUpdate", null);
 __decorate([
     (0, graphql_1.Query)((type) => getMarketList_dto_1.GetMarketListOutput),
     (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),

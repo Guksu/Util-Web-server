@@ -11,9 +11,10 @@ const graphql_1 = require("@nestjs/graphql");
 const output_dto_1 = require("../../common/dto/output.dto");
 const flea_market_entity_1 = require("../entity/flea-market.entity");
 let EditMarketInput = class EditMarketInput extends (0, graphql_1.PickType)(flea_market_entity_1.FleaMarket, [
-    'FleaMakretNo',
+    'FleaMarketNo',
     'content',
     'productImg',
+    'date',
 ]) {
 };
 EditMarketInput = __decorate([

@@ -1,7 +1,7 @@
 import { CommonOutput } from 'src/common/dto/output.dto';
 import { FleaMarket } from '../entity/flea-market.entity';
-declare const MarketViewUpadateInput_base: import("@nestjs/common").Type<Pick<FleaMarket, "FleaMakretNo">>;
-export declare class MarketViewUpadateInput extends MarketViewUpadateInput_base {
+declare const MarketViewUpdateInput_base: import("@nestjs/common").Type<Pick<FleaMarket, "FleaMarketNo">>;
+export declare class MarketViewUpdateInput extends MarketViewUpdateInput_base {
 }
 export declare class MarketViewUpdateOutput extends CommonOutput {
 }

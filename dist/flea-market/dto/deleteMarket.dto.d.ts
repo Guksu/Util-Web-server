@@ -1,6 +1,6 @@
 import { CommonOutput } from 'src/common/dto/output.dto';
 import { FleaMarket } from '../entity/flea-market.entity';
-declare const DeleteMarketInput_base: import("@nestjs/common").Type<Pick<FleaMarket, "FleaMakretNo">>;
+declare const DeleteMarketInput_base: import("@nestjs/common").Type<Pick<FleaMarket, "FleaMarketNo">>;
 export declare class DeleteMarketInput extends DeleteMarketInput_base {
 }
 export declare class DeleteMarketOutput extends CommonOutput {

@@ -20,7 +20,7 @@ __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)(),
     (0, graphql_1.Field)((type) => Number),
     __metadata("design:type", Number)
-], FleaMarket.prototype, "FleaMakretNo", void 0);
+], FleaMarket.prototype, "FleaMarketNo", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     (0, graphql_1.Field)((type) => String),
@@ -54,6 +54,12 @@ __decorate([
     (0, graphql_1.Field)((type) => String, { nullable: true }),
     __metadata("design:type", String)
 ], FleaMarket.prototype, "productImg", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    (0, graphql_1.Field)((type) => String),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], FleaMarket.prototype, "category", void 0);
 __decorate([
     (0, typeorm_1.ManyToOne)((type) => user_entity_1.User, (User) => User.fleaMarket, { cascade: true }),
     (0, graphql_1.Field)((type) => user_entity_1.User),

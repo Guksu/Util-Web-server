@@ -10,7 +10,7 @@ exports.DeleteMarketOutput = exports.DeleteMarketInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const output_dto_1 = require("../../common/dto/output.dto");
 const flea_market_entity_1 = require("../entity/flea-market.entity");
-let DeleteMarketInput = class DeleteMarketInput extends (0, graphql_1.PickType)(flea_market_entity_1.FleaMarket, ['FleaMakretNo']) {
+let DeleteMarketInput = class DeleteMarketInput extends (0, graphql_1.PickType)(flea_market_entity_1.FleaMarket, ['FleaMarketNo']) {
 };
 DeleteMarketInput = __decorate([
     (0, graphql_1.InputType)()

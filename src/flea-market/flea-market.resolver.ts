@@ -9,7 +9,7 @@ import { EditMarketInput, EditMarketOutput } from './dto/editMarket.dto';
 import { GetMarketInput, GetMarketOutput } from './dto/getMarket.dto';
 import { GetMarketListOutput } from './dto/getMarketList.dto';
 import {
-  MarketViewUpadateInput,
+  MarketViewUpdateInput,
   MarketViewUpdateOutput,
 } from './dto/viewUpdate.dto';
 import { FleacMarketService } from './flea-market.service';
@@ -38,7 +38,7 @@ export class FleaMarketResover {
 
   @Mutation((type) => DeleteMarketOutput)
   @UseGuards(GqlAuthGuard)
-  deleteReview(
+  deleteMarket(
     @GetUser() user: User,
     @Args('input') deleteMarketInput: DeleteMarketInput,
   ): Promise<DeleteMarketOutput> {
@@ -47,8 +47,8 @@ export class FleaMarketResover {
 
   @Mutation((type) => MarketViewUpdateOutput)
   @UseGuards(GqlAuthGuard)
-  viewUpdate(
-    @Args('input') marketViewUpdateInput: MarketViewUpadateInput,
+  marketViewUpdate(
+    @Args('input') marketViewUpdateInput: MarketViewUpdateInput,
   ): Promise<MarketViewUpdateOutput> {
     return this.fleaMarketService.marketViewUpdate(marketViewUpdateInput);
   }
@@ -56,7 +56,7 @@ export class FleaMarketResover {
   @Query((type) => GetMarketListOutput)
   @UseGuards(GqlAuthGuard)
   getMarketList(): Promise<GetMarketListOutput> {
-    return this.getMarketList();
+    return this.fleaMarketService.getMarketList();
   }
 
   @Query((type) => GetMarketOutput)
@@ -64,6 +64,6 @@ export class FleaMarketResover {
   getMarket(
     @Args('input') getMarketInput: GetMarketInput,
   ): Promise<GetMarketOutput> {
-    return this.getMarket(getMarketInput);
+    return this.fleaMarketService.getMarket(getMarketInput);
   }
 }

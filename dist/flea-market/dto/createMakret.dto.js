@@ -15,6 +15,7 @@ let CreateMarketInput = class CreateMarketInput extends (0, graphql_1.PickType)(
     'date',
     'title',
     'productImg',
+    'category',
 ]) {
 };
 CreateMarketInput = __decorate([

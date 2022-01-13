@@ -13,7 +13,7 @@ exports.GetMarketOutput = exports.GetMarketInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const output_dto_1 = require("../../common/dto/output.dto");
 const flea_market_entity_1 = require("../entity/flea-market.entity");
-let GetMarketInput = class GetMarketInput extends (0, graphql_1.PickType)(flea_market_entity_1.FleaMarket, ['FleaMakretNo']) {
+let GetMarketInput = class GetMarketInput extends (0, graphql_1.PickType)(flea_market_entity_1.FleaMarket, ['FleaMarketNo']) {
 };
 GetMarketInput = __decorate([
     (0, graphql_1.InputType)()
@@ -24,7 +24,7 @@ let GetMarketOutput = class GetMarketOutput extends output_dto_1.CommonOutput {
 __decorate([
     (0, graphql_1.Field)((type) => flea_market_entity_1.FleaMarket, { nullable: true }),
     __metadata("design:type", flea_market_entity_1.FleaMarket)
-], GetMarketOutput.prototype, "review", void 0);
+], GetMarketOutput.prototype, "market", void 0);
 GetMarketOutput = __decorate([
     (0, graphql_1.ObjectType)()
 ], GetMarketOutput);

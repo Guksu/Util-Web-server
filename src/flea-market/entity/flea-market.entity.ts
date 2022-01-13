@@ -9,7 +9,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 export class FleaMarket {
   @PrimaryGeneratedColumn()
   @Field((type) => Number)
-  FleaMakretNo: number;
+  FleaMarketNo: number;
 
   @Column()
   @Field((type) => String)
@@ -37,6 +37,11 @@ export class FleaMarket {
   @Column({ nullable: true })
   @Field((type) => String, { nullable: true })
   productImg: string;
+
+  @Column()
+  @Field((type) => String)
+  @IsString()
+  category: string;
 
   @ManyToOne((type) => User, (User) => User.fleaMarket, { cascade: true })
   @Field((type) => User)

@@ -22,13 +22,14 @@ let FleacMarketService = class FleacMarketService {
     constructor(fleaMarket) {
         this.fleaMarket = fleaMarket;
     }
-    async createMarket(user, { content, date, title, productImg }) {
+    async createMarket(user, { content, date, title, productImg, category }) {
         try {
             const newMarket = await this.fleaMarket.create({
                 content,
                 date,
                 title,
                 productImg,
+                category,
                 user: user['user'],
                 userName: user['user'].id,
                 userImg: user['user'].userImgUrl,
@@ -40,13 +41,15 @@ let FleacMarketService = class FleacMarketService {
             return { ok: false, error: error };
         }
     }
-    async edtiMarket({ FleaMakretNo, content, productImg, }) {
+    async edtiMarket({ FleaMarketNo, content, productImg, date, }) {
         try {
-            const checkMarket = await this.fleaMarket.findOne({ FleaMakretNo });
+            const checkMarket = await this.fleaMarket.findOne({ FleaMarketNo });
             if (content)
                 checkMarket.content = content;
             if (productImg)
                 checkMarket.productImg = productImg;
+            if (date)
+                checkMarket.date = date;
             await this.fleaMarket.save(checkMarket);
             return { ok: true };
         }
@@ -54,11 +57,11 @@ let FleacMarketService = class FleacMarketService {
             return { ok: false, error: error };
         }
     }
-    async deleteMarket(user, { FleaMakretNo }) {
+    async deleteMarket(user, { FleaMarketNo }) {
         try {
             const checkReview = await this.fleaMarket.findOne({
                 user: user['user'],
-                FleaMakretNo,
+                FleaMarketNo,
             });
             if (!checkReview)
                 return { ok: false, error: '작성글이 없습니다.' };
@@ -69,9 +72,9 @@ let FleacMarketService = class FleacMarketService {
             return { ok: false, error: error };
         }
     }
-    async marketViewUpdate({ FleaMakretNo, }) {
+    async marketViewUpdate({ FleaMarketNo, }) {
         try {
-            const checkList = await this.fleaMarket.findOne({ FleaMakretNo });
+            const checkList = await this.fleaMarket.findOne({ FleaMarketNo });
             checkList.view += 1;
             await this.fleaMarket.save(checkList);
             return { ok: true };
@@ -89,10 +92,10 @@ let FleacMarketService = class FleacMarketService {
             return { ok: false, error: error };
         }
     }
-    async getMarket({ FleaMakretNo }) {
+    async getMarket({ FleaMarketNo }) {
         try {
-            const checkReview = await this.fleaMarket.findOne({ FleaMakretNo });
-            return { ok: true, review: checkReview };
+            const checkReview = await this.fleaMarket.findOne({ FleaMarketNo });
+            return { ok: true, market: checkReview };
         }
         catch (error) {
             return { ok: false, error: error };

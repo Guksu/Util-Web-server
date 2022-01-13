@@ -6,18 +6,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MarketViewUpdateOutput = exports.MarketViewUpadateInput = void 0;
+exports.MarketViewUpdateOutput = exports.MarketViewUpdateInput = void 0;
 const graphql_1 = require("@nestjs/graphql");
 const output_dto_1 = require("../../common/dto/output.dto");
 const flea_market_entity_1 = require("../entity/flea-market.entity");
-let MarketViewUpadateInput = class MarketViewUpadateInput extends (0, graphql_1.PickType)(flea_market_entity_1.FleaMarket, [
-    'FleaMakretNo',
+let MarketViewUpdateInput = class MarketViewUpdateInput extends (0, graphql_1.PickType)(flea_market_entity_1.FleaMarket, [
+    'FleaMarketNo',
 ]) {
 };
-MarketViewUpadateInput = __decorate([
+MarketViewUpdateInput = __decorate([
     (0, graphql_1.InputType)()
-], MarketViewUpadateInput);
-exports.MarketViewUpadateInput = MarketViewUpadateInput;
+], MarketViewUpdateInput);
+exports.MarketViewUpdateInput = MarketViewUpdateInput;
 let MarketViewUpdateOutput = class MarketViewUpdateOutput extends output_dto_1.CommonOutput {
 };
 MarketViewUpdateOutput = __decorate([

@@ -8,6 +8,7 @@ export class CreateMarketInput extends PickType(FleaMarket, [
   'date',
   'title',
   'productImg',
+  'category',
 ]) {}
 
 @ObjectType()

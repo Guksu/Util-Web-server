@@ -3,7 +3,7 @@ import { CommonOutput } from 'src/common/dto/output.dto';
 import { FleaMarket } from '../entity/flea-market.entity';
 
 @InputType()
-export class DeleteMarketInput extends PickType(FleaMarket, ['FleaMakretNo']) {}
+export class DeleteMarketInput extends PickType(FleaMarket, ['FleaMarketNo']) {}
 
 @ObjectType()
 export class DeleteMarketOutput extends CommonOutput {}

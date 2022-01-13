@@ -4,9 +4,10 @@ import { FleaMarket } from '../entity/flea-market.entity';
 
 @InputType()
 export class EditMarketInput extends PickType(FleaMarket, [
-  'FleaMakretNo',
+  'FleaMarketNo',
   'content',
   'productImg',
+  'date',
 ]) {}
 
 @ObjectType()
