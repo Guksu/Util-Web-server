@@ -14,6 +14,8 @@ import { ProfileInfoOutput } from './dto/profileInfo.dto';
 import { User } from './entitiy/user.entity';
 import * as bcrypt from 'bcrypt';
 import { Fassion } from 'src/fassion/entitiy/fassion.entity';
+import { FoodBoard } from 'src/food-board/entitiy/food-board.entity';
+import { FleaMarket } from 'src/flea-market/entity/flea-market.entity';
 
 @Injectable()
 export class UserService {
@@ -22,6 +24,10 @@ export class UserService {
     private readonly user: Repository<User>,
     private readonly jwtService: JwtService,
     @InjectRepository(Fassion) private readonly fassion: Repository<Fassion>,
+    @InjectRepository(FoodBoard)
+    private readonly foodBoard: Repository<FoodBoard>,
+    @InjectRepository(FleaMarket)
+    private readonly fleaMarket: Repository<FleaMarket>,
   ) {}
 
   async createUser({
@@ -107,6 +113,8 @@ export class UserService {
     try {
       const findUser = await this.user.find(user['user']);
       const fassionImg = await this.fassion.find({ user: user['user'] });
+      const foodImg = await this.foodBoard.find({ user: user['user'] });
+      const maketImg = await this.fleaMarket.find({ user: user['user'] });
       if (!findUser)
         return {
           ok: false,
@@ -116,6 +124,14 @@ export class UserService {
       for (let i = 0; i < fassionImg.length; i++) {
         fassionImg[i].userImg = userImgUrl;
         await this.fassion.save(fassionImg[i]);
+      }
+      for (let i = 0; i < foodImg.length; i++) {
+        foodImg[i].userImg = userImgUrl;
+        await this.foodBoard.save(foodImg[i]);
+      }
+      for (let i = 0; i < maketImg.length; i++) {
+        maketImg[i].userImg = userImgUrl;
+        await this.fleaMarket.save(maketImg[i]);
       }
       await this.user.save(findUser[0]);
       return { ok: true };

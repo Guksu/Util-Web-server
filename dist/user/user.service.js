@@ -20,11 +20,15 @@ const typeorm_2 = require("typeorm");
 const user_entity_1 = require("./entitiy/user.entity");
 const bcrypt = require("bcrypt");
 const fassion_entity_1 = require("../fassion/entitiy/fassion.entity");
+const food_board_entity_1 = require("../food-board/entitiy/food-board.entity");
+const flea_market_entity_1 = require("../flea-market/entity/flea-market.entity");
 let UserService = class UserService {
-    constructor(user, jwtService, fassion) {
+    constructor(user, jwtService, fassion, foodBoard, fleaMarket) {
         this.user = user;
         this.jwtService = jwtService;
         this.fassion = fassion;
+        this.foodBoard = foodBoard;
+        this.fleaMarket = fleaMarket;
     }
     async createUser({ id, name, password, }) {
         try {
@@ -95,6 +99,8 @@ let UserService = class UserService {
         try {
             const findUser = await this.user.find(user['user']);
             const fassionImg = await this.fassion.find({ user: user['user'] });
+            const foodImg = await this.foodBoard.find({ user: user['user'] });
+            const maketImg = await this.fleaMarket.find({ user: user['user'] });
             if (!findUser)
                 return {
                     ok: false,
@@ -104,6 +110,14 @@ let UserService = class UserService {
             for (let i = 0; i < fassionImg.length; i++) {
                 fassionImg[i].userImg = userImgUrl;
                 await this.fassion.save(fassionImg[i]);
+            }
+            for (let i = 0; i < foodImg.length; i++) {
+                foodImg[i].userImg = userImgUrl;
+                await this.foodBoard.save(foodImg[i]);
+            }
+            for (let i = 0; i < maketImg.length; i++) {
+                maketImg[i].userImg = userImgUrl;
+                await this.fleaMarket.save(maketImg[i]);
             }
             await this.user.save(findUser[0]);
             return { ok: true };
@@ -135,8 +149,12 @@ UserService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
     __param(2, (0, typeorm_1.InjectRepository)(fassion_entity_1.Fassion)),
+    __param(3, (0, typeorm_1.InjectRepository)(food_board_entity_1.FoodBoard)),
+    __param(4, (0, typeorm_1.InjectRepository)(flea_market_entity_1.FleaMarket)),
     __metadata("design:paramtypes", [typeorm_2.Repository,
         jwt_1.JwtService,
+        typeorm_2.Repository,
+        typeorm_2.Repository,
         typeorm_2.Repository])
 ], UserService);
 exports.UserService = UserService;

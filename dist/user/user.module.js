@@ -12,6 +12,8 @@ const jwt_1 = require("@nestjs/jwt");
 const passport_1 = require("@nestjs/passport");
 const typeorm_1 = require("@nestjs/typeorm");
 const fassion_entity_1 = require("../fassion/entitiy/fassion.entity");
+const flea_market_entity_1 = require("../flea-market/entity/flea-market.entity");
+const food_board_entity_1 = require("../food-board/entitiy/food-board.entity");
 const user_entity_1 = require("./entitiy/user.entity");
 const jwt_strategy_1 = require("./jwt.strategy");
 const user_resolver_1 = require("./user.resolver");
@@ -28,7 +30,7 @@ UserModule = __decorate([
                     expiresIn: 60 * 60,
                 },
             }),
-            typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, fassion_entity_1.Fassion]),
+            typeorm_1.TypeOrmModule.forFeature([user_entity_1.User, fassion_entity_1.Fassion, food_board_entity_1.FoodBoard, flea_market_entity_1.FleaMarket]),
         ],
         providers: [user_resolver_1.UserResolver, user_service_1.UserService, jwt_strategy_1.JwtStrategy],
         exports: [user_service_1.UserService, jwt_strategy_1.JwtStrategy],

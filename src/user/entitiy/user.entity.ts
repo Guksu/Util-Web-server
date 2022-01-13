@@ -12,6 +12,7 @@ import * as bcrypt from 'bcrypt';
 import { Account } from 'src/account/entitiy/account.entity';
 import { Fassion } from 'src/fassion/entitiy/fassion.entity';
 import { FoodBoard } from 'src/food-board/entitiy/food-board.entity';
+import { FleaMarket } from 'src/flea-market/entity/flea-market.entity';
 
 @InputType('UserInputType', { isAbstract: true })
 @ObjectType()
@@ -59,11 +60,17 @@ export class User {
   @Field((type) => [Fassion], { nullable: true })
   fassion: [Fassion];
 
-  @OneToMany((type) => FoodBoard, (Fassion) => Fassion.user, {
+  @OneToMany((type) => FoodBoard, (FoodBoard) => FoodBoard.user, {
     onDelete: 'CASCADE',
   })
   @Field((type) => [FoodBoard], { nullable: true })
   foodBoard: [FoodBoard];
+
+  @OneToMany((type) => FleaMarket, (FleaMarket) => FleaMarket.user, {
+    onDelete: 'CASCADE',
+  })
+  @Field((type) => [FleaMarket], { nullable: true })
+  fleaMarket: [FleaMarket];
 
   @BeforeInsert()
   async hashPassword(): Promise<void> {

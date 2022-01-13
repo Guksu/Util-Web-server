@@ -14,6 +14,8 @@ import { FoodBoard } from './food-board/entitiy/food-board.entity';
 import { UploadsModule } from './uploads/uploads.module';
 import { Like } from './fassion/entitiy/like.entity';
 import { ChatGateway } from './chat.gateway';
+import { FleaMarketModule } from './flea-market/flea-market.module';
+import { FleaMarket } from './flea-market/entity/flea-market.entity';
 require('dotenv').config();
 
 @Module({
@@ -25,7 +27,7 @@ require('dotenv').config();
       username: 'root',
       password: process.env.PASSWORD,
       database: 'util-web',
-      entities: [User, Account, Fassion, FoodBoard, Like],
+      entities: [User, Account, Fassion, FoodBoard, Like, FleaMarket],
       synchronize: true,
     }),
     GraphQLModule.forRoot({
@@ -46,6 +48,7 @@ require('dotenv').config();
     FassionModule,
     FoodBoardModule,
     UploadsModule,
+    FleaMarketModule,
   ],
   controllers: [],
   providers: [ChatGateway],

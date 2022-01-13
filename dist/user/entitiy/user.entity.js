@@ -18,6 +18,7 @@ const bcrypt = require("bcrypt");
 const account_entity_1 = require("../../account/entitiy/account.entity");
 const fassion_entity_1 = require("../../fassion/entitiy/fassion.entity");
 const food_board_entity_1 = require("../../food-board/entitiy/food-board.entity");
+const flea_market_entity_1 = require("../../flea-market/entity/flea-market.entity");
 let User = class User {
     async hashPassword() {
         if (this.password) {
@@ -88,12 +89,19 @@ __decorate([
     __metadata("design:type", Array)
 ], User.prototype, "fassion", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)((type) => food_board_entity_1.FoodBoard, (Fassion) => Fassion.user, {
+    (0, typeorm_1.OneToMany)((type) => food_board_entity_1.FoodBoard, (FoodBoard) => FoodBoard.user, {
         onDelete: 'CASCADE',
     }),
     (0, graphql_1.Field)((type) => [food_board_entity_1.FoodBoard], { nullable: true }),
     __metadata("design:type", Array)
 ], User.prototype, "foodBoard", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)((type) => flea_market_entity_1.FleaMarket, (FleaMarket) => FleaMarket.user, {
+        onDelete: 'CASCADE',
+    }),
+    (0, graphql_1.Field)((type) => [flea_market_entity_1.FleaMarket], { nullable: true }),
+    __metadata("design:type", Array)
+], User.prototype, "fleaMarket", void 0);
 __decorate([
     (0, typeorm_1.BeforeInsert)(),
     __metadata("design:type", Function),
