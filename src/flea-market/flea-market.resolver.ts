@@ -6,8 +6,10 @@ import { User } from 'src/user/entitiy/user.entity';
 import { CreateMarketInput, CreateMarketOutput } from './dto/createMakret.dto';
 import { DeleteMarketInput, DeleteMarketOutput } from './dto/deleteMarket.dto';
 import { EditMarketInput, EditMarketOutput } from './dto/editMarket.dto';
+import { GetChatLogInput, GetChatLogOutput } from './dto/getChat.dto';
 import { GetMarketInput, GetMarketOutput } from './dto/getMarket.dto';
 import { GetMarketListOutput } from './dto/getMarketList.dto';
+import { SaveChatInput, SaveChatOutput } from './dto/saveChat.dto';
 import {
   MarketViewUpdateInput,
   MarketViewUpdateOutput,
@@ -65,5 +67,22 @@ export class FleaMarketResover {
     @Args('input') getMarketInput: GetMarketInput,
   ): Promise<GetMarketOutput> {
     return this.fleaMarketService.getMarket(getMarketInput);
+  }
+
+  @Mutation((type) => SaveChatOutput)
+  @UseGuards(GqlAuthGuard)
+  saveChat(
+    @GetUser() user: User,
+    @Args('input') saveChatInput: SaveChatInput,
+  ): Promise<SaveChatOutput> {
+    return this.fleaMarketService.saveChat(user, saveChatInput);
+  }
+
+  @Query((type) => GetChatLogOutput)
+  @UseGuards(GqlAuthGuard)
+  getChat(
+    @Args('input') getChatLogInput: GetChatLogInput,
+  ): Promise<GetChatLogOutput> {
+    return this.fleaMarketService.getChat(getChatLogInput);
   }
 }

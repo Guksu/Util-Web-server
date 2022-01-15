@@ -25,6 +25,7 @@ const like_entity_1 = require("./fassion/entitiy/like.entity");
 const chat_gateway_1 = require("./chat.gateway");
 const flea_market_module_1 = require("./flea-market/flea-market.module");
 const flea_market_entity_1 = require("./flea-market/entity/flea-market.entity");
+const chatLog_dto_1 = require("./flea-market/entity/chatLog.dto");
 require('dotenv').config();
 let AppModule = class AppModule {
 };
@@ -38,7 +39,7 @@ AppModule = __decorate([
                 username: 'root',
                 password: process.env.PASSWORD,
                 database: 'util-web',
-                entities: [user_entity_1.User, account_entity_1.Account, fassion_entity_1.Fassion, food_board_entity_1.FoodBoard, like_entity_1.Like, flea_market_entity_1.FleaMarket],
+                entities: [user_entity_1.User, account_entity_1.Account, fassion_entity_1.Fassion, food_board_entity_1.FoodBoard, like_entity_1.Like, flea_market_entity_1.FleaMarket, chatLog_dto_1.ChatLog],
                 synchronize: true,
             }),
             graphql_1.GraphQLModule.forRoot({

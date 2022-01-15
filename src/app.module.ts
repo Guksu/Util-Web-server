@@ -16,6 +16,7 @@ import { Like } from './fassion/entitiy/like.entity';
 import { ChatGateway } from './chat.gateway';
 import { FleaMarketModule } from './flea-market/flea-market.module';
 import { FleaMarket } from './flea-market/entity/flea-market.entity';
+import { ChatLog } from './flea-market/entity/chatLog.dto';
 require('dotenv').config();
 
 @Module({
@@ -27,7 +28,7 @@ require('dotenv').config();
       username: 'root',
       password: process.env.PASSWORD,
       database: 'util-web',
-      entities: [User, Account, Fassion, FoodBoard, Like, FleaMarket],
+      entities: [User, Account, Fassion, FoodBoard, Like, FleaMarket, ChatLog],
       synchronize: true,
     }),
     GraphQLModule.forRoot({

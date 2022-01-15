@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FleaMarketModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const chatLog_dto_1 = require("./entity/chatLog.dto");
 const flea_market_entity_1 = require("./entity/flea-market.entity");
 const flea_market_resolver_1 = require("./flea-market.resolver");
 const flea_market_service_1 = require("./flea-market.service");
@@ -16,7 +17,7 @@ let FleaMarketModule = class FleaMarketModule {
 };
 FleaMarketModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([flea_market_entity_1.FleaMarket])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([flea_market_entity_1.FleaMarket, chatLog_dto_1.ChatLog])],
         providers: [flea_market_resolver_1.FleaMarketResover, flea_market_service_1.FleacMarketService],
         exports: [flea_market_service_1.FleacMarketService],
     })

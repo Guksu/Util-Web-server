@@ -18,10 +18,20 @@ let ChatGateway = class ChatGateway {
         this.logger = new common_1.Logger('AppGateway');
     }
     handleMessage(client, payload) {
-        this.server.emit('msgToClient', payload, client.id);
+        this.server.to(payload.room).emit('msgToClient', payload, client.id);
     }
     afterInit(server) {
         this.logger.log('Init');
+    }
+    handleRoomJoin(client, room) {
+        client.join(room);
+        client.emit('joinedRoom', room);
+        this.logger.log(`${client.id} joined ${room}`);
+    }
+    handleRoomLeave(client, room) {
+        client.leave(room);
+        client.emit('leftRoom', room);
+        this.logger.log(`${client.id} left ${room}`);
     }
     handleConnection(client) {
         this.logger.log(`Client connected: ${client.id}`);
@@ -37,9 +47,21 @@ __decorate([
 __decorate([
     (0, websockets_1.SubscribeMessage)('msgToServer'),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [socket_io_1.Socket, String]),
+    __metadata("design:paramtypes", [socket_io_1.Socket, Object]),
     __metadata("design:returntype", void 0)
 ], ChatGateway.prototype, "handleMessage", null);
+__decorate([
+    (0, websockets_1.SubscribeMessage)('joinRoom'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [socket_io_1.Socket, String]),
+    __metadata("design:returntype", void 0)
+], ChatGateway.prototype, "handleRoomJoin", null);
+__decorate([
+    (0, websockets_1.SubscribeMessage)('leaveRoom'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [socket_io_1.Socket, String]),
+    __metadata("design:returntype", void 0)
+], ChatGateway.prototype, "handleRoomLeave", null);
 ChatGateway = __decorate([
     (0, websockets_1.WebSocketGateway)({ cors: { origin: '*' } })
 ], ChatGateway);

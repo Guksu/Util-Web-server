@@ -5,12 +5,15 @@ import { Repository } from 'typeorm';
 import { CreateMarketInput, CreateMarketOutput } from './dto/createMakret.dto';
 import { DeleteMarketInput, DeleteMarketOutput } from './dto/deleteMarket.dto';
 import { EditMarketInput, EditMarketOutput } from './dto/editMarket.dto';
+import { GetChatLogInput, GetChatLogOutput } from './dto/getChat.dto';
 import { GetMarketInput, GetMarketOutput } from './dto/getMarket.dto';
 import { GetMarketListOutput } from './dto/getMarketList.dto';
+import { SaveChatInput, SaveChatOutput } from './dto/saveChat.dto';
 import {
   MarketViewUpdateInput,
   MarketViewUpdateOutput,
 } from './dto/viewUpdate.dto';
+import { ChatLog } from './entity/chatLog.dto';
 import { FleaMarket } from './entity/flea-market.entity';
 
 @Injectable()
@@ -18,6 +21,8 @@ export class FleacMarketService {
   constructor(
     @InjectRepository(FleaMarket)
     private readonly fleaMarket: Repository<FleaMarket>,
+    @InjectRepository(ChatLog)
+    private readonly chatLog: Repository<ChatLog>,
   ) {}
 
   async createMarket(
@@ -107,6 +112,34 @@ export class FleacMarketService {
       const checkReview = await this.fleaMarket.findOne({ FleaMarketNo });
 
       return { ok: true, market: checkReview };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async saveChat(
+    user: User,
+    { chatLog, room }: SaveChatInput,
+  ): Promise<SaveChatOutput> {
+    try {
+      const newChat = await this.chatLog.create({
+        chatLog,
+        room,
+        name: user['user'].id,
+      });
+
+      await this.chatLog.save(newChat);
+      return { ok: true };
+    } catch (error) {
+      return { ok: false, error: error };
+    }
+  }
+
+  async getChat({ room }: GetChatLogInput): Promise<GetChatLogOutput> {
+    try {
+      const checkChat = await this.chatLog.find({ room });
+
+      return { ok: true, chatLog: checkChat };
     } catch (error) {
       return { ok: false, error: error };
     }

@@ -17,10 +17,12 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const user_entity_1 = require("../user/entitiy/user.entity");
 const typeorm_2 = require("typeorm");
+const chatLog_dto_1 = require("./entity/chatLog.dto");
 const flea_market_entity_1 = require("./entity/flea-market.entity");
 let FleacMarketService = class FleacMarketService {
-    constructor(fleaMarket) {
+    constructor(fleaMarket, chatLog) {
         this.fleaMarket = fleaMarket;
+        this.chatLog = chatLog;
     }
     async createMarket(user, { content, date, title, productImg, category }) {
         try {
@@ -101,11 +103,36 @@ let FleacMarketService = class FleacMarketService {
             return { ok: false, error: error };
         }
     }
+    async saveChat(user, { chatLog, room }) {
+        try {
+            const newChat = await this.chatLog.create({
+                chatLog,
+                room,
+                name: user['user'].id,
+            });
+            await this.chatLog.save(newChat);
+            return { ok: true };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
+    async getChat({ room }) {
+        try {
+            const checkChat = await this.chatLog.find({ room });
+            return { ok: true, chatLog: checkChat };
+        }
+        catch (error) {
+            return { ok: false, error: error };
+        }
+    }
 };
 FleacMarketService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(flea_market_entity_1.FleaMarket)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __param(1, (0, typeorm_1.InjectRepository)(chatLog_dto_1.ChatLog)),
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        typeorm_2.Repository])
 ], FleacMarketService);
 exports.FleacMarketService = FleacMarketService;
 //# sourceMappingURL=flea-market.service.js.map

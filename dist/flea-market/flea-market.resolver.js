@@ -21,8 +21,10 @@ const user_entity_1 = require("../user/entitiy/user.entity");
 const createMakret_dto_1 = require("./dto/createMakret.dto");
 const deleteMarket_dto_1 = require("./dto/deleteMarket.dto");
 const editMarket_dto_1 = require("./dto/editMarket.dto");
+const getChat_dto_1 = require("./dto/getChat.dto");
 const getMarket_dto_1 = require("./dto/getMarket.dto");
 const getMarketList_dto_1 = require("./dto/getMarketList.dto");
+const saveChat_dto_1 = require("./dto/saveChat.dto");
 const viewUpdate_dto_1 = require("./dto/viewUpdate.dto");
 const flea_market_service_1 = require("./flea-market.service");
 let FleaMarketResover = class FleaMarketResover {
@@ -46,6 +48,12 @@ let FleaMarketResover = class FleaMarketResover {
     }
     getMarket(getMarketInput) {
         return this.fleaMarketService.getMarket(getMarketInput);
+    }
+    saveChat(user, saveChatInput) {
+        return this.fleaMarketService.saveChat(user, saveChatInput);
+    }
+    getChat(getChatLogInput) {
+        return this.fleaMarketService.getChat(getChatLogInput);
     }
 };
 __decorate([
@@ -99,6 +107,24 @@ __decorate([
     __metadata("design:paramtypes", [getMarket_dto_1.GetMarketInput]),
     __metadata("design:returntype", Promise)
 ], FleaMarketResover.prototype, "getMarket", null);
+__decorate([
+    (0, graphql_1.Mutation)((type) => saveChat_dto_1.SaveChatOutput),
+    (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
+    __param(0, (0, auth_user_decorator_1.GetUser)()),
+    __param(1, (0, graphql_1.Args)('input')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [user_entity_1.User,
+        saveChat_dto_1.SaveChatInput]),
+    __metadata("design:returntype", Promise)
+], FleaMarketResover.prototype, "saveChat", null);
+__decorate([
+    (0, graphql_1.Query)((type) => getChat_dto_1.GetChatLogOutput),
+    (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
+    __param(0, (0, graphql_1.Args)('input')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [getChat_dto_1.GetChatLogInput]),
+    __metadata("design:returntype", Promise)
+], FleaMarketResover.prototype, "getChat", null);
 FleaMarketResover = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [flea_market_service_1.FleacMarketService])
