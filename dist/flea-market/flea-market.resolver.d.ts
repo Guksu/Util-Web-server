@@ -1,5 +1,6 @@
 import { User } from 'src/user/entitiy/user.entity';
 import { CreateMarketInput, CreateMarketOutput } from './dto/createMakret.dto';
+import { DeleteChatLogInput, DeleteChatLogOutput } from './dto/deleteChatLog.dto';
 import { DeleteMarketInput, DeleteMarketOutput } from './dto/deleteMarket.dto';
 import { EditMarketInput, EditMarketOutput } from './dto/editMarket.dto';
 import { GetChatLogInput, GetChatLogOutput } from './dto/getChat.dto';
@@ -19,4 +20,5 @@ export declare class FleaMarketResover {
     getMarket(getMarketInput: GetMarketInput): Promise<GetMarketOutput>;
     saveChat(user: User, saveChatInput: SaveChatInput): Promise<SaveChatOutput>;
     getChat(getChatLogInput: GetChatLogInput): Promise<GetChatLogOutput>;
+    deleteChat(deleteChatLogInput: DeleteChatLogInput): Promise<DeleteChatLogOutput>;
 }

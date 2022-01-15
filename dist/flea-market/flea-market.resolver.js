@@ -19,6 +19,7 @@ const auth_guard_1 = require("../auth/auth.guard");
 const auth_user_decorator_1 = require("../auth/auth.user-decorator");
 const user_entity_1 = require("../user/entitiy/user.entity");
 const createMakret_dto_1 = require("./dto/createMakret.dto");
+const deleteChatLog_dto_1 = require("./dto/deleteChatLog.dto");
 const deleteMarket_dto_1 = require("./dto/deleteMarket.dto");
 const editMarket_dto_1 = require("./dto/editMarket.dto");
 const getChat_dto_1 = require("./dto/getChat.dto");
@@ -54,6 +55,9 @@ let FleaMarketResover = class FleaMarketResover {
     }
     getChat(getChatLogInput) {
         return this.fleaMarketService.getChat(getChatLogInput);
+    }
+    deleteChat(deleteChatLogInput) {
+        return this.fleaMarketService.deleteChat(deleteChatLogInput);
     }
 };
 __decorate([
@@ -125,6 +129,14 @@ __decorate([
     __metadata("design:paramtypes", [getChat_dto_1.GetChatLogInput]),
     __metadata("design:returntype", Promise)
 ], FleaMarketResover.prototype, "getChat", null);
+__decorate([
+    (0, graphql_1.Mutation)((type) => deleteChatLog_dto_1.DeleteChatLogOutput),
+    (0, common_1.UseGuards)(auth_guard_1.GqlAuthGuard),
+    __param(0, (0, graphql_1.Args)('input')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [deleteChatLog_dto_1.DeleteChatLogInput]),
+    __metadata("design:returntype", Promise)
+], FleaMarketResover.prototype, "deleteChat", null);
 FleaMarketResover = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [flea_market_service_1.FleacMarketService])

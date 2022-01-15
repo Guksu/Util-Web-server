@@ -126,6 +126,18 @@ let FleacMarketService = class FleacMarketService {
             return { ok: false, error: error };
         }
     }
+    async deleteChat({ room }) {
+        try {
+            const checkChat = await this.chatLog.find({ room });
+            for (let i = 0; i < checkChat.length; i++) {
+                await this.chatLog.delete(checkChat[i]);
+            }
+            return { ok: true };
+        }
+        catch (error) {
+            return { ok: false, error };
+        }
+    }
 };
 FleacMarketService = __decorate([
     (0, common_1.Injectable)(),

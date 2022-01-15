@@ -12,6 +12,8 @@ interface Payload {
   room: string;
 }
 
+let saveRoom;
+
 @WebSocketGateway({ cors: { origin: '*' } })
 export class ChatGateway {
   @WebSocketServer() server: Server;
@@ -20,6 +22,7 @@ export class ChatGateway {
   @SubscribeMessage('msgToServer')
   handleMessage(client: Socket, payload: Payload): void {
     this.server.to(payload.room).emit('msgToClient', payload, client.id);
+    saveRoom = payload.room;
   }
 
   afterInit(server: Server) {
@@ -33,18 +36,13 @@ export class ChatGateway {
     this.logger.log(`${client.id} joined ${room}`);
   }
 
-  @SubscribeMessage('leaveRoom')
-  handleRoomLeave(client: Socket, room: string) {
-    client.leave(room);
-    client.emit('leftRoom', room);
-    this.logger.log(`${client.id} left ${room}`);
-  }
-
   handleConnection(client: Socket) {
     this.logger.log(`Client connected: ${client.id}`);
   }
 
   handleDisconnect(client: Socket) {
-    this.logger.log(`Client disconnected: ${client.id}`);
+    client.leave(saveRoom);
+    client.emit('leftRoom', saveRoom);
+    this.logger.log(`Client disconnected: ${client.id} and left ${saveRoom}`);
   }
 }

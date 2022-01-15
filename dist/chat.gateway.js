@@ -13,12 +13,14 @@ exports.ChatGateway = void 0;
 const common_1 = require("@nestjs/common");
 const websockets_1 = require("@nestjs/websockets");
 const socket_io_1 = require("socket.io");
+let saveRoom;
 let ChatGateway = class ChatGateway {
     constructor() {
         this.logger = new common_1.Logger('AppGateway');
     }
     handleMessage(client, payload) {
         this.server.to(payload.room).emit('msgToClient', payload, client.id);
+        saveRoom = payload.room;
     }
     afterInit(server) {
         this.logger.log('Init');
@@ -28,16 +30,13 @@ let ChatGateway = class ChatGateway {
         client.emit('joinedRoom', room);
         this.logger.log(`${client.id} joined ${room}`);
     }
-    handleRoomLeave(client, room) {
-        client.leave(room);
-        client.emit('leftRoom', room);
-        this.logger.log(`${client.id} left ${room}`);
-    }
     handleConnection(client) {
         this.logger.log(`Client connected: ${client.id}`);
     }
     handleDisconnect(client) {
-        this.logger.log(`Client disconnected: ${client.id}`);
+        client.leave(saveRoom);
+        client.emit('leftRoom', saveRoom);
+        this.logger.log(`Client disconnected: ${client.id} and left ${saveRoom}`);
     }
 };
 __decorate([
@@ -56,12 +55,6 @@ __decorate([
     __metadata("design:paramtypes", [socket_io_1.Socket, String]),
     __metadata("design:returntype", void 0)
 ], ChatGateway.prototype, "handleRoomJoin", null);
-__decorate([
-    (0, websockets_1.SubscribeMessage)('leaveRoom'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [socket_io_1.Socket, String]),
-    __metadata("design:returntype", void 0)
-], ChatGateway.prototype, "handleRoomLeave", null);
 ChatGateway = __decorate([
     (0, websockets_1.WebSocketGateway)({ cors: { origin: '*' } })
 ], ChatGateway);

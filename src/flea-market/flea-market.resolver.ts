@@ -4,6 +4,10 @@ import { GqlAuthGuard } from 'src/auth/auth.guard';
 import { GetUser } from 'src/auth/auth.user-decorator';
 import { User } from 'src/user/entitiy/user.entity';
 import { CreateMarketInput, CreateMarketOutput } from './dto/createMakret.dto';
+import {
+  DeleteChatLogInput,
+  DeleteChatLogOutput,
+} from './dto/deleteChatLog.dto';
 import { DeleteMarketInput, DeleteMarketOutput } from './dto/deleteMarket.dto';
 import { EditMarketInput, EditMarketOutput } from './dto/editMarket.dto';
 import { GetChatLogInput, GetChatLogOutput } from './dto/getChat.dto';
@@ -84,5 +88,13 @@ export class FleaMarketResover {
     @Args('input') getChatLogInput: GetChatLogInput,
   ): Promise<GetChatLogOutput> {
     return this.fleaMarketService.getChat(getChatLogInput);
+  }
+
+  @Mutation((type) => DeleteChatLogOutput)
+  @UseGuards(GqlAuthGuard)
+  deleteChat(
+    @Args('input') deleteChatLogInput: DeleteChatLogInput,
+  ): Promise<DeleteChatLogOutput> {
+    return this.fleaMarketService.deleteChat(deleteChatLogInput);
   }
 }

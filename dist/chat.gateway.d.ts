@@ -10,7 +10,6 @@ export declare class ChatGateway {
     handleMessage(client: Socket, payload: Payload): void;
     afterInit(server: Server): void;
     handleRoomJoin(client: Socket, room: string): void;
-    handleRoomLeave(client: Socket, room: string): void;
     handleConnection(client: Socket): void;
     handleDisconnect(client: Socket): void;
 }

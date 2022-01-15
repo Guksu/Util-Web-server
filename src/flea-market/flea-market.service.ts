@@ -3,6 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/user/entitiy/user.entity';
 import { Repository } from 'typeorm';
 import { CreateMarketInput, CreateMarketOutput } from './dto/createMakret.dto';
+import {
+  DeleteChatLogInput,
+  DeleteChatLogOutput,
+} from './dto/deleteChatLog.dto';
 import { DeleteMarketInput, DeleteMarketOutput } from './dto/deleteMarket.dto';
 import { EditMarketInput, EditMarketOutput } from './dto/editMarket.dto';
 import { GetChatLogInput, GetChatLogOutput } from './dto/getChat.dto';
@@ -142,6 +146,20 @@ export class FleacMarketService {
       return { ok: true, chatLog: checkChat };
     } catch (error) {
       return { ok: false, error: error };
+    }
+  }
+
+  async deleteChat({ room }: DeleteChatLogInput): Promise<DeleteChatLogOutput> {
+    try {
+      const checkChat = await this.chatLog.find({ room });
+
+      for (let i = 0; i < checkChat.length; i++) {
+        await this.chatLog.delete(checkChat[i]);
+      }
+
+      return { ok: true };
+    } catch (error) {
+      return { ok: false, error };
     }
   }
 }
