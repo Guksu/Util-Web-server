@@ -32,7 +32,7 @@ require('dotenv').config();
       synchronize: true,
     }),
     GraphQLModule.forRoot({
-      autoSchemaFile: true,
+      autoSchemaFile: false,
       context: ({ req, connection }) => {
         if (req) {
           const user = req.headers.authorization;
